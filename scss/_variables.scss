@@ -1,15 +1,12 @@
 $text-white: white;
 
 $mobile-font-sizes: (
-  "name": 3rem,
   "title": 3rem,
-  "link": 0.5rem,
-  "timer": 0.5rem,
+  "link": 1.5rem,
 );
 
-// $desktop-font-sizes: (
-//   "name": 2.3rem,
-//   "title": 3rem,
-//   "link": 1.4rem,
-//   "timer": 0.8rem,
-// );
+$desktop-font-sizes: (
+  "name": 4rem,
+  "title": 4.3rem,
+  "link": 2rem,
+);

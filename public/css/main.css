@@ -16,7 +16,7 @@ body {
 }
 
 h1 {
-  font-size: 100px;
+  font-size: 48px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
@@ -24,7 +24,7 @@ h1 {
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 42px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
@@ -32,7 +32,7 @@ h2 {
 }
 
 h3 {
-  font-size: 30px;
+  font-size: 36px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
@@ -42,7 +42,7 @@ h3 {
 h4,
 h5,
 h6 {
-  font-size: 20px;
+  font-size: 28px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
@@ -63,7 +63,7 @@ textarea,
 select,
 button {
   font-size: 100%;
-  line-height: 1.2;
+  line-height: 1.2em;
 }
 
 button {
@@ -125,15 +125,13 @@ code {
   line-height: 1.2;
 }
 
-html {
-  font-family: "Inconsolata", monospace;
-}
-
 body,
 html {
+  font-family: "Inconsolata", monospace;
   height: 100%;
   margin: 0;
   color: white;
+  text-shadow: 4px 4px 10px #000000;
 }
 
 .bg {
@@ -160,11 +158,12 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border: 1px solid green;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .justify-center {
@@ -184,26 +183,24 @@ html {
       justify-content: space-around;
 }
 
-.name {
-  font-size: 3rem;
-  border: 1px solid purple;
-}
-
+.name,
 .title {
-  border: 1px solid green;
+  height: auto;
   font-size: 3rem;
 }
 
-.timer {
-  font-size: 0.5rem;
-}
-
-.test {
-  border: 1px solid red;
+.links {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 40%;
+  font-size: 1.5rem;
 }
 
 a {
-  border: 1px solid white;
+  margin: auto;
+  padding: 0;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -214,6 +211,26 @@ a:hover {
 }
 
 p {
-  border: 1px solid white;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 600px) {
+  .name {
+    height: auto;
+    font-size: 4rem;
+  }
+  .title {
+    height: auto;
+    font-size: 4.3rem;
+  }
+  .links {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    height: 40%;
+    font-size: 2rem;
+  }
 }
 /*# sourceMappingURL=main.css.map */

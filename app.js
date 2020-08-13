@@ -16,14 +16,7 @@ app.set("views", path.join(__dirname, "src", "views"));
 app.set("view engine", "ejs");
 
 const port = process.env.PORT || 5000;
-// const TWO_HOURS = 1000 * 60 * 10;
-// const {
-// SESS_LIFETIME = TWO_HOURS,
-// NODE_ENV = "development",
-// SESS_SECRET = "ssh!thisis'atest!",
-// SESS_NAME = "sid",
-// } = process.env;
-//
+
 // sql.connect(config).catch((err) => debug(err));
 const csrfMiddleware = csurf({
   cookie: true,
@@ -64,6 +57,16 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/popper.js/dist"))
 );
 
+const otherRouter = require("./src/routes/otherRoutes")();
+
+app.use("/Other", otherRouter);
+const expRouter = require("./src/routes/expRoutes")();
+
+app.use("/Exp", expRouter);
+
+const nodeRouter = require("./src/routes/nodeRoutes")();
+
+app.use("/Node", nodeRouter);
 const aboutRouter = require("./src/routes/aboutRoutes")();
 
 app.use("/About", aboutRouter);
