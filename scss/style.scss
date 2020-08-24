@@ -1,6 +1,14 @@
 @import "./resets";
+@import "./variables";
+
+.border {
+  border: 1px solid red;
+}
+
 .container {
   max-width: 1080px;
+  // padding-left: 50px;
+  // padding-right: 50px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -27,6 +35,16 @@ nav {
 
     align-items: center;
   }
+  a {
+    margin: auto;
+    padding: 0;
+    color: $text-white;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+      color: $text-white;
+    }
+  }
 }
 
 ul {
@@ -43,6 +61,10 @@ ul {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  .row {
+    padding-top: 40px;
+    padding: 30px;
+  }
 }
 
 .frame {
@@ -80,37 +102,90 @@ ul {
 .head-shot img {
   filter: grayscale(100%);
   border-radius: 55px;
-  height: 448px;
-  width: 368px;
+  height: 292px;
+  width: 240px;
   padding: 10px;
 }
 .content {
   border-radius: 70px;
   max-width: 900px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+  p {
+    text-align: left;
+  }
 }
 
-p {
-  padding: 35px;
-  padding-bottom: 80px;
-  padding-top: 80px;
-  margin: 10px;
-  border-radius: 55px;
-  background-color: white;
-}
 h1 {
   padding: 35px;
   padding-bottom: 50px;
   padding-top: 50px;
-  margin: 10px;
+
   border-radius: 55px;
   background-color: white;
 }
+footer {
+  // padding-top: 20px;
 
-@media (min-width: 660px) {
+  .row {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-around;
+  }
+  a {
+    margin: auto;
+    padding: 0;
+    color: $text-dark;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+@media (min-width: 560px) {
+  .frame {
+    border-radius: 75px;
+    background: rgb(170, 170, 170);
+    background: linear-gradient(
+      90deg,
+      rgba(230, 230, 230, 1) 0%,
+      rgba(250, 250, 250, 1) 40%,
+      rgba(250, 250, 250, 1) 60%,
+      rgba(230, 230, 230, 1) 100%
+    );
+    padding: 5px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5), 0 1px 5px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .frame-edge {
+    border-radius: 73px;
+    background: rgb(170, 170, 170);
+    background: linear-gradient(
+      45deg,
+      rgba(230, 230, 230, 1) 0%,
+      rgba(250, 250, 250, 0.5) 10%,
+      rgba(250, 250, 250, 0.5) 90%,
+      rgba(230, 230, 230, 1) 100%
+    );
+    padding: 5px;
+  }
+  .glass {
+    /* border: 3px solid rgba(170, 170, 170, 1) 100%; */
+    border-radius: 70px;
+    padding: 10px;
+    background-color: black;
+  }
+  .head-shot img {
+    filter: grayscale(100%);
+    border-radius: 55px;
+    height: 448px;
+    width: 368px;
+    padding: 10px;
+  }
+}
+
+@media (min-width: 760px) {
   nav {
     justify-content: space-between;
   }
