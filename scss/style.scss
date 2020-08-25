@@ -2,38 +2,57 @@
 @import "./variables";
 
 .border {
-  border: 1px solid red;
+  border: 1px solid blue;
 }
 
 .container {
+  // border: 1px solid blue;
+
   max-width: 1080px;
-  // padding-left: 50px;
-  // padding-right: 50px;
   margin-left: auto;
   margin-right: auto;
 }
+.col {
+  // border: 1px solid green;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  // border: 1px solid yellow;
+  height: 100%;
+  display: flex;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.align-center {
+  align-items: center;
+}
+
+// ------ nav -------
+
 .nav-bar {
   background-color: rgb(38, 38, 38);
 }
 nav {
-  //   border: 1px solid red;
-
-  height: auto;
+  // border: 1px solid red;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   img {
     margin-top: 2px;
     padding-left: 10px;
     padding-right: 10px;
-
     height: 2.4rem;
     width: 2.4rem;
   }
-  .row {
+  .brand-row {
+    // border: 1px solid red;
     display: flex;
-
-    align-items: center;
+    justify-content: center;
   }
   a {
     margin: auto;
@@ -42,31 +61,82 @@ nav {
     text-align: center;
     text-decoration: none;
     &:hover {
-      color: $text-white;
+      color: $hover;
     }
+  }
+  ul {
+    display: flex;
+  }
+  li {
+    margin: 10px;
   }
 }
 
-ul {
-  display: none;
-}
 .brand {
-  //   border: 1px solid blue;
+  // border: 1px solid red;
   color: white;
   font-size: 2rem;
 }
 
-.page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  .row {
-    padding-top: 40px;
-    padding: 30px;
+// ------- end nav --------
+//-----content-----
+.content {
+  padding: 1rem;
+  padding-bottom: 4rem;
+  max-width: 900px;
+  height: 100%;
+  border-bottom: 2px solid darkgray;
+  border-top: 2px solid darkgray;
+
+  p {
+    padding: 1rem;
+    text-align: left;
+  }
+  &:nth-child(odd) {
+    background: lightgray;
   }
 }
+.heading {
+  color: $hover;
+  text-align: center;
+  text-shadow: 1px 2px 5px rgba(255, 255, 255, 0.726);
+}
+//-----end content-----
+//-----foooter-----
+footer {
+  border-top: 2px solid darkgray;
+  // border: 1px solid red;
+  background-color: lightgrey;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 
+  .row {
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-around;
+  }
+  a {
+    margin: auto;
+    padding: 0;
+    color: $text-white;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+      color: $hover;
+    }
+  }
+}
+//-----end foooter-----
+
+//-----modifiers-----
+.hide-on-mobile {
+  display: none;
+}
+//-----end modifiers-----
+
+// ------------ headshot img ----------------
 .frame {
   border-radius: 75px;
   background: rgb(170, 170, 170);
@@ -80,7 +150,6 @@ ul {
   padding: 5px;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5), 0 1px 5px 0 rgba(0, 0, 0, 0.5);
 }
-
 .frame-edge {
   border-radius: 73px;
   background: rgb(170, 170, 170);
@@ -106,44 +175,15 @@ ul {
   width: 240px;
   padding: 10px;
 }
-.content {
-  border-radius: 70px;
-  max-width: 900px;
-
-  p {
-    text-align: left;
-  }
+.headshot {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 
-h1 {
-  padding: 35px;
-  padding-bottom: 50px;
-  padding-top: 50px;
-
-  border-radius: 55px;
-  background-color: white;
-}
-footer {
-  // padding-top: 20px;
-
-  .row {
-    padding-top: 30px;
-    display: flex;
-    justify-content: space-around;
-  }
-  a {
-    margin: auto;
-    padding: 0;
-    color: $text-dark;
-    text-align: center;
-    text-decoration: none;
-    &:hover {
-      color: black;
-    }
-  }
-}
+// ------------ end headshot img ----------------
 
 @media (min-width: 560px) {
+  // ------------ headshot img ----------------
   .frame {
     border-radius: 75px;
     background: rgb(170, 170, 170);
@@ -157,7 +197,6 @@ footer {
     padding: 5px;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.5), 0 1px 5px 0 rgba(0, 0, 0, 0.5);
   }
-
   .frame-edge {
     border-radius: 73px;
     background: rgb(170, 170, 170);
@@ -183,20 +222,24 @@ footer {
     width: 368px;
     padding: 10px;
   }
+  // ------------ end headshot img ----------------
 }
 
 @media (min-width: 760px) {
+  //-------nav----------
   nav {
-    justify-content: space-between;
+    flex-direction: row;
+    // border: 1px solid blue;
+    justify-content: space-around;
+    align-items: center;
   }
   ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    color: white;
   }
   li {
-    margin: 10px;
-    align-self: flex-end;
+  }
+
+  //----------end nav-------
+  .hide-on-mobile {
+    display: inherit;
   }
 }
