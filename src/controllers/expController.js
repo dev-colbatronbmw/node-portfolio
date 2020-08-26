@@ -8,6 +8,8 @@ function expController() {
 
     res.render("exp", {});
   }
+
+  // C# Downloads
   function getMovieTicket(req, res) {
     debug("Get Movie ticket: ", "Working");
     const file = "./projects/cSharp/MovieObj.zip";
@@ -28,12 +30,44 @@ function expController() {
     const file = "./projects/cSharp/TransportGame.zip";
     res.download(file);
   }
+  // Ruby Downloads
+  function getRPS(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ruby/one/rps.zip";
+    res.download(file);
+  }
+  function getProducts(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ruby/one/products.zip";
+    res.download(file);
+  }
+  function getConnectFour(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ruby/one/connectFour.zip";
+    res.download(file);
+  }
+  function getJuke(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ruby/two/Jukebox.zip";
+    res.download(file);
+  }
+  function getWordSearch(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ruby/two/wordsearch.zip";
+    res.download(file);
+  }
+
   return {
     getExp,
     getMovieTicket,
     getStudent,
     getUnityGameWindows,
     getUnityGameMac,
+    getRPS,
+    getProducts,
+    getConnectFour,
+    getJuke,
+    getWordSearch,
   };
 }
 module.exports = expController;

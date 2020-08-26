@@ -107,13 +107,24 @@ nav {
     text-align: center;
   }
 }
+.green {
+  color: $green;
+  font-weight: bold;
+}
 .heading {
   color: $hover;
   text-align: center;
 }
 .downloads {
   display: flex;
+  flex-direction: column;
+  align-content: center;
   justify-content: center;
+  form {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
 }
 .projects {
   p {
@@ -260,5 +271,17 @@ footer {
   //----------end nav-------
   .hide-on-mobile {
     display: inherit;
+  }
+  .downloads {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+
+    form {
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+    }
   }
 }
