@@ -269,6 +269,19 @@ nav li {
   text-align: center;
 }
 
+.downloads {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.projects p {
+  text-align: center;
+}
+
 footer {
   border-top: 2px solid darkgray;
   background-color: lightgrey;

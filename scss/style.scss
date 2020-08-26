@@ -111,6 +111,15 @@ nav {
   color: $hover;
   text-align: center;
 }
+.downloads {
+  display: flex;
+  justify-content: center;
+}
+.projects {
+  p {
+    text-align: center;
+  }
+}
 //-----end content-----
 //-----foooter-----
 footer {
@@ -246,10 +255,6 @@ footer {
     // border: 1px solid blue;
     justify-content: space-around;
     align-items: center;
-  }
-  ul {
-  }
-  li {
   }
 
   //----------end nav-------
