@@ -123,7 +123,15 @@ nav {
     font-weight: bold;
   }
 }
-
+.image-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+.pic {
+  width: 285px;
+}
 .green {
   color: $green;
   font-weight: bold;
@@ -151,6 +159,15 @@ nav {
   p {
     text-align: center;
   }
+}
+.my-form {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.my-form-row {
 }
 //-----end content-----
 //-----foooter-----
@@ -278,9 +295,16 @@ footer {
     padding: 10px;
   }
   // ------------ end headshot img ----------------
+
+  .pic {
+    width: 400px;
+  }
 }
 
 @media (min-width: 760px) {
+  .pic {
+    width: 700px;
+  }
   //-------nav----------
   nav {
     flex-direction: row;

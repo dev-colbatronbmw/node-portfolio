@@ -287,6 +287,24 @@ nav li {
   font-weight: bold;
 }
 
+.image-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 2rem;
+}
+
+.pic {
+  width: 285px;
+}
+
 .green {
   color: #37752b;
   font-weight: bold;
@@ -329,6 +347,21 @@ nav li {
 
 .projects p {
   text-align: center;
+}
+
+.my-form {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 footer {
@@ -438,9 +471,15 @@ footer a:hover {
     width: 368px;
     padding: 10px;
   }
+  .pic {
+    width: 400px;
+  }
 }
 
 @media (min-width: 760px) {
+  .pic {
+    width: 700px;
+  }
   nav {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
