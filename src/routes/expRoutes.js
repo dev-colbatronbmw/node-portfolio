@@ -21,9 +21,17 @@ function router() {
     getRecordsRoom,
     getRecordsApi,
     getBattleship,
+    getRoShamBillQ1,
+    getRoShamBillQ2,
+    getPetTracker,
+    getCaseMatch,
+    getPlankCooking,
+    getNodeApi,
+    getResume,
   } = expController();
 
   expRouter.route("/").get(getExp);
+  expRouter.route("/Resume").get(getResume);
 
   // C# Downloads
 
@@ -49,6 +57,20 @@ function router() {
   expRouter.route("/RecordsRoom").get(getRecordsRoom);
   expRouter.route("/RecordsApi").get(getRecordsApi);
   expRouter.route("/Battleship").get(getBattleship);
+
+  // iOS 1 Downloads
+  expRouter.route("/RoShamBillQ1").get(getRoShamBillQ1);
+
+  // iOS 2 Downloads
+  expRouter.route("/RoShamBillQ2").get(getRoShamBillQ2);
+  expRouter.route("/PetTracker").get(getPetTracker);
+
+  // iOS Personal Projects Download
+  expRouter.route("/CaseMatch").get(getCaseMatch);
+
+  // node.js Downloads
+  expRouter.route("/PlankCooking").get(getPlankCooking);
+  expRouter.route("/NodeApi").get(getNodeApi);
 
   return expRouter;
 }

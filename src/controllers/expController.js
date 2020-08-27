@@ -9,6 +9,12 @@ function expController() {
     res.render("exp", {});
   }
 
+  function getResume(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/Colby_Holmstead_-_Full_Stack_Developer.pdf";
+    res.download(file);
+  }
+
   // C# Downloads
   function getMovieTicket(req, res) {
     debug("Get Movie ticket: ", "Working");
@@ -79,6 +85,42 @@ function expController() {
     res.download(file);
   }
 
+  // iOS Downloads
+
+  function getRoShamBillQ1(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ios/one/FinalProject.zip";
+    res.download(file);
+  }
+  function getRoShamBillQ2(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ios/two/FinalProject.zip";
+    res.download(file);
+  }
+  function getPetTracker(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ios/two/pet-tracker.zip";
+    res.download(file);
+  }
+  function getCaseMatch(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/ios/Case Match.zip";
+    res.download(file);
+  }
+
+  // node Downloads
+
+  function getPlankCooking(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/node/plankcooking.zip";
+    res.download(file);
+  }
+  function getNodeApi(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/node/nodeapi.zip";
+    res.download(file);
+  }
+
   return {
     getExp,
     getMovieTicket,
@@ -94,6 +136,13 @@ function expController() {
     getRecordsRoom,
     getRecordsApi,
     getBattleship,
+    getRoShamBillQ1,
+    getRoShamBillQ2,
+    getPetTracker,
+    getCaseMatch,
+    getPlankCooking,
+    getNodeApi,
+    getResume,
   };
 }
 module.exports = expController;

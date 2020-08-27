@@ -264,6 +264,29 @@ nav li {
   text-align: center;
 }
 
+.content .work-history {
+  border-bottom: 1px solid #9b9b9bd3;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: left;
+}
+
+.content .work-history li {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.content .heading {
+  font-weight: bold;
+}
+
 .green {
   color: #37752b;
   font-weight: bold;
