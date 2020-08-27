@@ -269,6 +269,11 @@ nav li {
   font-weight: bold;
 }
 
+.line {
+  border-top: 1px solid #9b9b9bd3;
+  padding-top: 1rem;
+}
+
 .heading {
   color: #37752b;
   text-align: center;

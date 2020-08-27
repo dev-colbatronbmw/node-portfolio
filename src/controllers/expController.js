@@ -57,6 +57,28 @@ function expController() {
     res.download(file);
   }
 
+  // Java Downloads
+  function getCalculator(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/java/Calculator-4.zip";
+    res.download(file);
+  }
+  function getRecordsRoom(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/java/Records.zip";
+    res.download(file);
+  }
+  function getRecordsApi(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/java/RecordsWithApi.zip";
+    res.download(file);
+  }
+  function getBattleship(req, res) {
+    debug("Get Student: ", "Working");
+    const file = "./projects/java/Battleship-2.zip";
+    res.download(file);
+  }
+
   return {
     getExp,
     getMovieTicket,
@@ -68,6 +90,10 @@ function expController() {
     getConnectFour,
     getJuke,
     getWordSearch,
+    getCalculator,
+    getRecordsRoom,
+    getRecordsApi,
+    getBattleship,
   };
 }
 module.exports = expController;
