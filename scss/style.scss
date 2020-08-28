@@ -106,10 +106,69 @@ nav {
     align-content: center;
     text-align: center;
   }
+  .work-history {
+    border-bottom: 1px solid #9b9b9bd3;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+    li {
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
+  }
+  .heading {
+    font-weight: bold;
+  }
+}
+.image-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+.pic {
+  width: 285px;
+}
+.green {
+  color: $green;
+  font-weight: bold;
+}
+.line {
+  border-top: 1px solid #9b9b9bd3;
+  padding-top: 1rem;
 }
 .heading {
   color: $hover;
   text-align: center;
+}
+.downloads {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  form {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+  }
+}
+.projects {
+  p {
+    text-align: center;
+  }
+}
+.my-form {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.comment {
+  height: 50px;
 }
 //-----end content-----
 //-----foooter-----
@@ -237,9 +296,16 @@ footer {
     padding: 10px;
   }
   // ------------ end headshot img ----------------
+
+  .pic {
+    width: 400px;
+  }
 }
 
 @media (min-width: 760px) {
+  .pic {
+    width: 700px;
+  }
   //-------nav----------
   nav {
     flex-direction: row;
@@ -247,13 +313,21 @@ footer {
     justify-content: space-around;
     align-items: center;
   }
-  ul {
-  }
-  li {
-  }
 
   //----------end nav-------
   .hide-on-mobile {
     display: inherit;
+  }
+  .downloads {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+
+    form {
+      padding: 0.5rem;
+      display: flex;
+      justify-content: center;
+    }
   }
 }
