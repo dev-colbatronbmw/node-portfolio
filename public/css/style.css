@@ -364,6 +364,10 @@ nav li {
           align-items: center;
 }
 
+.comment {
+  height: 50px;
+}
+
 footer {
   border-top: 2px solid darkgray;
   background-color: lightgrey;
