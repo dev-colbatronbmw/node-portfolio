@@ -21,7 +21,7 @@ db.connect(function (err) {
     console.error("error connecting: " + err.stack);
     return;
   }
-  debug("connected as id: ", db.threadId);
+  debug("connected to Database");
 });
 
 db.end();
