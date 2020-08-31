@@ -4,6 +4,8 @@ const debug = require("debug")("app");
 const morgan = require("morgan");
 const path = require("path");
 const bodyParser = require("body-parser");
+const session = require("express-session");
+require("dotenv/config");
 // const csurf = require("csurf");
 const cookieParser = require("cookie-parser");
 
@@ -12,7 +14,7 @@ const mysql = require("mysql");
 var db = mysql.createConnection({
   host: "portfolio-db.colbyholmstead.com",
   user: "colbyportfolio",
-  password: "xuqdy8-mukdud-Guwroh",
+  password: process.env.DATABASE_ACCESS,
   database: "crhportfolio",
 });
 
@@ -40,6 +42,13 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  session({
+    secret: "secretTunnle",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 // app.use(csrfMiddleware);
 
 app.use(morgan("dev"));

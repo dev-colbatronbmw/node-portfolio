@@ -3,7 +3,7 @@ const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const csurf = require("csurf");
 const nodemailer = require("nodemailer");
-
+const session = require("express-session");
 const pool = mysql.createPool({
   host: "portfolio-db.colbyholmstead.com",
   user: "colbyportfolio",
@@ -20,15 +20,18 @@ function contactController() {
 
   function getContact(req, res) {
     debug("Get Contact: ", "Working");
+    debug("form page session ID:", req.sessionID);
     // res.send("about test");
     res.render("contact", {});
   }
 
   function getMyContacts(req, res) {
-    console.log("fetching product " + req.params.prodId);
+    // debug("session info:", session);
+    debug("json page session ID:", req.sessionID);
+    // console.log("fetching product " + req.params.prodId);
     const connection = getConnection();
 
-    const qString = "SELECT * FROM api";
+    const qString = "SELECT * FROM contacts";
     connection.query(qString, (err, rows, fields) => {
       if (err) {
         console.log("Failed to query for products" + err);
@@ -37,20 +40,24 @@ function contactController() {
         return;
       }
       // console.log("success?");
-      console.log(rows);
+      // console.log(rows);
 
       //code modification
-      const products = rows.map((row) => {
+      const contacts = rows.map((row) => {
         return {
-          prodId: row.prodId,
-          prodName: row.prodName,
-          prodDesc: row.prodDesc,
-          prodPrice: row.prodPrice,
-          prodRating: row.prodRating,
+          FirstName: row.FirstName,
+          lastName: row.LastName,
+          Email: row.Email,
+          Company: row.Company,
+          Zip: row.Zip,
+          Comments: row.Comments,
+          Phone: row.Phone,
+          TypeOfContact: row.TypeOfContact,
+          Contacted: row.Contacted,
         };
       });
 
-      res.json(products);
+      res.json(contacts);
     });
   }
 
