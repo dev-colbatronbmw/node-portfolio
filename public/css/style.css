@@ -231,6 +231,10 @@ nav li {
   font-size: 2rem;
 }
 
+.danger {
+  color: red;
+}
+
 .content {
   height: 100%;
   width: 90vw;
@@ -375,6 +379,10 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
+}
+
+footer .show {
+  color: #37752b;
 }
 
 footer .feedback-hide {

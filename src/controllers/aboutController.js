@@ -19,26 +19,19 @@ function aboutController() {
 
   function getAbout(req, res) {
     debug("Get About: ", "Working");
-    res.render("about", { csrfToken: req.csrfToken(), Page: "About" });
-  }
-  function getFeedback(req, res) {
-    if (req.session.showFeedback === true) {
-      req.session.showFeedback = false;
-      variable = "hide";
-    } else {
-      req.session.showFeedback = true;
-      variable = "show";
-    }
-    req.session.variable = variable;
-    debug("variable value:", variable);
-    const show = req.session.showFeedback;
-    debug("show feedback: ", req.session.showFeedback);
     res.render("about", {
       csrfToken: req.csrfToken(),
       Page: "About",
-      showFeedback: show,
-      variable: variable,
+      variable: req.session.variable,
     });
+  }
+  function getFeedback(req, res) {
+    if (req.session.variable === "hide") {
+      req.session.variable = "show";
+    } else {
+      req.session.variable = "hide";
+    }
+    res.redirect("/About");
   }
 
   function postFeedback(req, res) {
@@ -60,17 +53,8 @@ function aboutController() {
           res.sendStatus(500);
           return;
         }
-
-        req.session.showFeedback = false;
-        const show = req.session.showFeedback;
-        debug("show feedback: ", req.session.showFeedback);
-        debug("variable value:", variable);
-        res.render("about", {
-          csrfToken: req.csrfToken(),
-          Page: page,
-          showFeedback: show,
-          variable: req.session.variable,
-        });
+        req.session.variable = "hide";
+        res.redirect("/About");
       }
     );
   }

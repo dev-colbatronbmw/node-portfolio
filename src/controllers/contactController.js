@@ -23,21 +23,9 @@ function contactController() {
 
   function getContact(req, res) {
     debug("Get Contact: ", "Working");
-
-    //------------ example of passing data through session --------------
-    // req.session.test;
-    // if (req.session.test === true) {
-    //   req.session.test = false;
-    // } else {
-    //   req.session.test = true;
-    // }
-
-    // res.send("about test");
     res.render("contact", {
-      // test: req.session.test,
       Page: "Contact",
       csrfToken: req.csrfToken(),
-      showFeedback: req.session.feedback,
       variable: req.session.variable,
     });
   }
@@ -106,38 +94,24 @@ function contactController() {
 
         debug("Form: ", "Sent");
 
-        res.render("Contact", {
-          // test: req.session.test,
-          csrfToken: req.csrfToken(),
-        });
+        res.redirect("/Contact");
       }
     );
   }
   function getFeedback(req, res) {
-    if (req.session.showFeedback === true) {
-      req.session.showFeedback = false;
-      variable = "hide";
+    if (req.session.variable === "hide") {
+      req.session.variable = "show";
     } else {
-      req.session.showFeedback = true;
-      variable = "show";
+      req.session.variable = "hide";
     }
-    req.session.variable = variable;
-    debug("variable value:", variable);
-    const show = req.session.showFeedback;
-    debug("show feedback: ", req.session.showFeedback);
-    res.render("contact", {
-      csrfToken: req.csrfToken(),
-      Page: "Contact",
-      showFeedback: show,
-      variable: req.session.variable,
-    });
+    res.redirect("/Contact");
   }
 
   function postFeedback(req, res) {
     // make insert query
     const email = req.body.email;
-    const feedback = req.body.comment;
     const page = "Contact";
+    const feedback = req.body.comment;
     const good = 1;
     const complete = 0;
 
@@ -153,14 +127,10 @@ function contactController() {
           return;
         }
 
-        req.session.showFeedback = false;
-        const show = req.session.showFeedback;
-        debug("show feedback: ", req.session.showFeedback);
-        debug("variable value:", variable);
+        req.session.variable = "hide";
         res.render("contact", {
+          Page: "Contact",
           csrfToken: req.csrfToken(),
-          Page: page,
-          showFeedback: show,
           variable: req.session.variable,
         });
       }

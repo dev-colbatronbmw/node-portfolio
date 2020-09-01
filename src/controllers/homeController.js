@@ -5,9 +5,8 @@ function homeController() {
 
   function getHome(req, res) {
     debug("Get Home: ", "Working");
-    req.session.showFeedback = false;
-    var variable = "hide";
-    req.session.variable = variable;
+
+    req.session.variable = "hide";
     res.render("index", { csrfToken: req.csrfToken() });
   }
 

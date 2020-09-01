@@ -83,6 +83,9 @@ nav {
 
 // ------- end nav --------
 //-----content-----
+.danger {
+  color: red;
+}
 .content {
   // padding: 1rem;
   // padding-bottom: 4rem;
@@ -181,7 +184,8 @@ footer {
   bottom: 0;
   width: 100%;
 
-  .feedback-show {
+  .show {
+    color: $green;
   }
   .feedback-hide {
     display: none;
@@ -202,6 +206,7 @@ footer {
     }
   }
 }
+
 .footer-name {
   font-weight: bold;
   color: $green;

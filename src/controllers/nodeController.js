@@ -21,40 +21,24 @@ function nodeController() {
 
   function getNode(req, res) {
     debug("Get node: ", "Working");
-    // req.session.showFeedback = false;
-    // var variable = "hide";
-    // req.session.variable = variable;
-    debug("show feedback: ", req.session.showFeedback);
-
     res.render("node", {
       csrfToken: req.csrfToken(),
       Page: "Node",
-      showFeedback: req.session.feedback,
       variable: req.session.variable,
     });
   }
   function getFeedback(req, res) {
-    if (req.session.showFeedback === true) {
-      req.session.showFeedback = false;
-      variable = "hide";
+    if (req.session.variable === "hide") {
+      req.session.variable = "show";
     } else {
-      req.session.showFeedback = true;
-      variable = "show";
+      req.session.variable = "hide";
     }
-    req.session.variable = variable;
-    debug("variable value:", variable);
-    const show = req.session.showFeedback;
+    debug("variable value:", req.session.variable);
     debug("show feedback: ", req.session.showFeedback);
-    res.render("node", {
-      csrfToken: req.csrfToken(),
-      Page: "Node",
-      showFeedback: show,
-      variable: req.session.variable,
-    });
+    res.redirect("/Node");
   }
 
   function postFeedback(req, res) {
-    // make insert query
     const email = req.body.email;
     const feedback = req.body.comment;
     const page = "Node";
@@ -72,17 +56,8 @@ function nodeController() {
           res.sendStatus(500);
           return;
         }
-
-        req.session.showFeedback = false;
-        const show = req.session.showFeedback;
-        debug("show feedback: ", req.session.showFeedback);
-        debug("variable value:", variable);
-        res.render("node", {
-          csrfToken: req.csrfToken(),
-          Page: page,
-          showFeedback: show,
-          variable: req.session.variable,
-        });
+        req.session.variable = "hide";
+        res.redirect("/Node");
       }
     );
   }
