@@ -6,7 +6,7 @@ function homeController() {
   function getHome(req, res) {
     debug("Get Home: ", "Working");
 
-    res.render("index", {});
+    res.render("index", { csrfToken: req.csrfToken() });
   }
 
   return {

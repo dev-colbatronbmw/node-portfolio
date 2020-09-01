@@ -1,14 +1,16 @@
 const debug = require("debug")("app:contactController");
+require("dotenv/config");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
-const csurf = require("csurf");
+const cookieParser = require("cookie-parser");
+// const csurf = require("csurf");
 const nodemailer = require("nodemailer");
-const session = require("express-session");
+
 const pool = mysql.createPool({
-  host: "portfolio-db.colbyholmstead.com",
-  user: "colbyportfolio",
-  password: "xuqdy8-mukdud-Guwroh",
-  database: "crhportfolio",
+  host: process.env.HOST,
+  user: process.env.USER_DATA,
+  password: process.env.DATABASE_ACCESS,
+  database: process.env.DATABASE,
 });
 
 function getConnection() {
@@ -17,18 +19,28 @@ function getConnection() {
 
 function contactController() {
   debug("contact controller: ", "working");
+  const Page = "Contact";
 
   function getContact(req, res) {
     debug("Get Contact: ", "Working");
-    debug("form page session ID:", req.sessionID);
+
+    //------------ example of passing data through session --------------
+    // req.session.test;
+    // if (req.session.test === true) {
+    //   req.session.test = false;
+    // } else {
+    //   req.session.test = true;
+    // }
+
     // res.send("about test");
-    res.render("contact", {});
+    res.render("contact", {
+      // test: req.session.test,
+      Page,
+      csrfToken: req.csrfToken(),
+    });
   }
 
   function getMyContacts(req, res) {
-    // debug("session info:", session);
-    debug("json page session ID:", req.sessionID);
-    // console.log("fetching product " + req.params.prodId);
     const connection = getConnection();
 
     const qString = "SELECT * FROM contacts";
@@ -39,10 +51,6 @@ function contactController() {
         res.end();
         return;
       }
-      // console.log("success?");
-      // console.log(rows);
-
-      //code modification
       const contacts = rows.map((row) => {
         return {
           FirstName: row.FirstName,
@@ -62,10 +70,6 @@ function contactController() {
   }
 
   function postContact(req, res) {
-    console.log("adding");
-    // validate info
-    // const firstName = req.body.firstName;
-    console.log(req.body);
     const FirstName = req.body.firstName;
     const LastName = req.body.lastName;
     const Company = req.body.company;
@@ -100,45 +104,10 @@ function contactController() {
 
         debug("Form: ", "Sent");
 
-        async function main() {
-          // Generate test SMTP service account from ethereal.email
-          // Only needed if you don't have a real mail account for testing
-          let testAccount = await nodemailer.createTestAccount();
-
-          // create reusable transporter object using the default SMTP transport
-          let transporter = nodemailer.createTransport({
-            host: "smtp.dreamhost.com",
-            port: 465,
-            secure: true, // true for 465, false for other ports
-            auth: {
-              user: "mail@colbyholmstead.com", // generated ethereal user
-              pass: "hiqgog-wezhe0-Fefhuw", // generated ethereal password
-            },
-            tls: {
-              rejectUnauthorized: false,
-            },
-          });
-
-          // send mail with defined transport object
-          let info = await transporter.sendMail({
-            from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
-            to: "dev@colbyholmstead.com", // list of receivers
-            subject: "Test", // Subject line
-            text: "Hello world?", // plain text body
-            html: "<b>Hello world?</b>", // html body
-          });
-
-          console.log("Message sent: %s", info.messageId);
-          // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-          // Preview only available when sending through an Ethereal account
-          console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-          // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-        }
-
-        main().catch(console.error);
-
-        res.redirect("/Contact");
+        res.render("Contact", {
+          // test: req.session.test,
+          csrfToken: req.csrfToken(),
+        });
       }
     );
   }

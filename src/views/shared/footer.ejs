@@ -1,8 +1,27 @@
 <footer class="">
   <div class="container">
       <div class="col">
+<div class="feedback-<%=variable%>" >
+        <div class="row ">
+          <form action="/<%=Page%>/Feedback" method="POST">
+            <div class="col">
+           
+                <label for="email">Email&nbsp;</label>
+                <input type="text" name="email" id="email" value="" />
+               </div>
+<div class="col">
+                <label for="email">Questions/Comments&nbsp;</label>
+                <textarea name="comment" id="comment" value="" ></textarea>
+          </div>
+          <div class="col">
+<input class="green" type="submit" value="Send Feedback">
+          </div>
+          <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+          </form>
+        </div>
+      </div>
         <div class="row justify-around">
-          <a href="#">feedback</a>
+          <a href="/<%=Page%>/Feedback">feedback</a>
           <a href="/Exp/Resume">resumé</a>  
       
         
@@ -11,6 +30,8 @@
         <div class="row footer-name">
             <p>Colby Holmstead 2020</p>
         </div>
+
+
       </div>
   </div>
 </footer>

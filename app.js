@@ -6,16 +6,16 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 require("dotenv/config");
-// const csurf = require("csurf");
+const csurf = require("csurf");
 const cookieParser = require("cookie-parser");
 
 const mysql = require("mysql");
 
 var db = mysql.createConnection({
-  host: "portfolio-db.colbyholmstead.com",
-  user: "colbyportfolio",
+  host: process.env.HOST,
+  user: process.env.USER_DATA,
   password: process.env.DATABASE_ACCESS,
-  database: "crhportfolio",
+  database: process.env.DATABASE,
 });
 
 db.connect(function (err) {
@@ -34,9 +34,9 @@ app.set("view engine", "ejs");
 
 const port = process.env.PORT || 5000;
 
-// const csrfMiddleware = csurf({
-//   cookie: true,
-// });
+const csrfMiddleware = csurf({
+  cookie: true,
+});
 
 // const IN_PROD = NODE_ENV === "production";
 app.use(bodyParser.json());
@@ -44,12 +44,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   session({
-    secret: "secretTunnle",
+    secret: process.env.SECRET_TUNNLE,
     resave: false,
     saveUninitialized: false,
   })
 );
-// app.use(csrfMiddleware);
+app.use(csrfMiddleware);
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));

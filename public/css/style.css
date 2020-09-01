@@ -140,6 +140,7 @@ code {
 }
 
 .col {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -150,7 +151,6 @@ code {
 }
 
 .row {
-  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -375,6 +375,10 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
+}
+
+footer .feedback-hide {
+  display: none;
 }
 
 footer .row {

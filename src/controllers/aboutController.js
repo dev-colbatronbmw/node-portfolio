@@ -5,8 +5,7 @@ function aboutController() {
 
   function getAbout(req, res) {
     debug("Get About: ", "Working");
-
-    res.render("about", {});
+    res.render("about", { csrfToken: req.csrfToken() });
   }
 
   return {

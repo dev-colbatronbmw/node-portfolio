@@ -6,7 +6,7 @@ function expController() {
   function getExp(req, res) {
     debug("Get exp: ", "Working");
 
-    res.render("exp", {});
+    res.render("exp", { csrfToken: req.csrfToken() });
   }
 
   function getResume(req, res) {
