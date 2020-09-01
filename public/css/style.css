@@ -140,6 +140,7 @@ code {
 }
 
 .col {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -150,7 +151,6 @@ code {
 }
 
 .row {
-  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -229,6 +229,10 @@ nav li {
 .brand {
   color: white;
   font-size: 2rem;
+}
+
+.danger {
+  color: red;
 }
 
 .content {
@@ -364,6 +368,10 @@ nav li {
           align-items: center;
 }
 
+.comment {
+  height: 50px;
+}
+
 footer {
   border-top: 2px solid darkgray;
   background-color: lightgrey;
@@ -371,6 +379,14 @@ footer {
   left: 0;
   bottom: 0;
   width: 100%;
+}
+
+footer .show {
+  color: #37752b;
+}
+
+footer .feedback-hide {
+  display: none;
 }
 
 footer .row {

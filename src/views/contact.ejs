@@ -67,6 +67,19 @@
   </div> 
   <div class="my-form-row">
     <div class="my-form-col-1">
+      <label for="email">Best way to Contact you:&nbsp;</label>
+    </div>
+    <div class="my-form-col-3">
+      <select name="TypeOfContact" id="TypeOfContact">
+        <option value="Email">Please Email Me</option>
+        <option value="Call">Shoot Me a Call</option>
+      </select>
+     
+</div>  
+
+</div> 
+  <div class="my-form-row">
+    <div class="my-form-col-1">
       <label for="email">Questions/Comments:&nbsp;</label>
     </div>
     <div class="my-form-col-3 comment">
@@ -77,6 +90,9 @@
 </div> 
   <input class="green" type="submit"> 
 </div>  
+
+
+<input type="hidden" name="_csrf" value="<%=csrfToken%>">
    </form>
   </div> 
   </div>

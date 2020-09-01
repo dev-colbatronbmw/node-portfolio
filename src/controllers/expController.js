@@ -1,12 +1,31 @@
 const debug = require("debug")("app:expController");
 
+const session = require("express-session");
+require("dotenv/config");
+const mysql = require("mysql");
+
+const pool = mysql.createPool({
+  host: process.env.HOST,
+  user: process.env.USER_DATA,
+  password: process.env.DATABASE_ACCESS,
+  database: process.env.DATABASE,
+});
+
+function getConnection() {
+  return pool;
+}
+
 function expController() {
   debug("exp controller: ", "working");
 
   function getExp(req, res) {
     debug("Get exp: ", "Working");
 
-    res.render("exp", {});
+    res.render("exp", {
+      Page: "Exp",
+      csrfToken: req.csrfToken(),
+      variable: req.session.variable,
+    });
   }
 
   function getResume(req, res) {
@@ -120,6 +139,40 @@ function expController() {
     const file = "./projects/node/nodeapi.zip";
     res.download(file);
   }
+  function getFeedback(req, res) {
+    if (req.session.variable === "hide") {
+      req.session.variable = "show";
+    } else {
+      req.session.variable = "hide";
+    }
+    res.redirect("/Exp");
+  }
+
+  function postFeedback(req, res) {
+    // make insert query
+    const email = req.body.email;
+    const feedback = req.body.comment;
+    const page = "exp";
+    const good = 1;
+    const complete = 0;
+
+    const qString =
+      "INSERT INTO feedback ( feedback, Email, Page, Good, Complete) Values (?, ?, ?, ?, ?)";
+    getConnection().query(
+      qString,
+      [email, feedback, page, good, complete],
+      (err, results, fields) => {
+        if (err) {
+          console.log("failed to insert product" + err);
+          res.sendStatus(500);
+          return;
+        }
+
+        req.session.variable = "hide";
+        res.redirect("/Exp");
+      }
+    );
+  }
 
   return {
     getExp,
@@ -143,6 +196,8 @@ function expController() {
     getPlankCooking,
     getNodeApi,
     getResume,
+    getFeedback,
+    postFeedback,
   };
 }
 module.exports = expController;

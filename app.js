@@ -3,21 +3,37 @@ const chalk = require("chalk");
 const debug = require("debug")("app");
 const morgan = require("morgan");
 const path = require("path");
-// const sql = require("mssql");
 const bodyParser = require("body-parser");
+const session = require("express-session");
+require("dotenv/config");
 const csurf = require("csurf");
-// const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
-// const sql = require("mssql");
+const mysql = require("mysql");
 
+var db = mysql.createConnection({
+  host: process.env.HOST,
+  user: process.env.USER_DATA,
+  password: process.env.DATABASE_ACCESS,
+  database: process.env.DATABASE,
+});
+
+db.connect(function (err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+  debug("connected to Database");
+});
+
+db.end();
 const app = express();
+
 app.set("views", path.join(__dirname, "src", "views"));
 app.set("view engine", "ejs");
 
 const port = process.env.PORT || 5000;
 
-// sql.connect(config).catch((err) => debug(err));
 const csrfMiddleware = csurf({
   cookie: true,
 });
@@ -26,20 +42,16 @@ const csrfMiddleware = csurf({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(
+  session({
+    secret: process.env.SECRET_TUNNLE,
+    resave: false,
+    saveUninitialized: false,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 3),
+  })
+);
 app.use(csrfMiddleware);
 
-// app.use(
-//   session({
-//     resave: false,
-//     saveUninitialized: false,
-//     secret: "ssh!thisis'atest!",
-//     cookie: {
-//       maxAge: TWO_HOURS,
-//       sameSite: true,
-//       secure: false,
-//     },
-//   })
-// );
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public", "css")));
@@ -74,7 +86,7 @@ app.use("/About", aboutRouter);
 const contactRouter = require("./src/routes/contactRoutes")();
 
 app.use("/Contact", contactRouter);
-const homeRouter = require("./src/routes/homeRoutes")();
+const homeRouter = require("./src/routes/homeRoutes")(db);
 
 app.use("/", homeRouter);
 
