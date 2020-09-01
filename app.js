@@ -47,6 +47,7 @@ app.use(
     secret: process.env.SECRET_TUNNLE,
     resave: false,
     saveUninitialized: false,
+    expires: new Date(Date.now() + 60 * 1800 * 1000),
   })
 );
 app.use(csrfMiddleware);

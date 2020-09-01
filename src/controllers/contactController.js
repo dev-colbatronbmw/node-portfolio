@@ -35,8 +35,10 @@ function contactController() {
     // res.send("about test");
     res.render("contact", {
       // test: req.session.test,
-      Page,
+      Page: "Contact",
       csrfToken: req.csrfToken(),
+      showFeedback: req.session.feedback,
+      variable: req.session.variable,
     });
   }
 
@@ -111,10 +113,65 @@ function contactController() {
       }
     );
   }
+  function getFeedback(req, res) {
+    if (req.session.showFeedback === true) {
+      req.session.showFeedback = false;
+      variable = "hide";
+    } else {
+      req.session.showFeedback = true;
+      variable = "show";
+    }
+    req.session.variable = variable;
+    debug("variable value:", variable);
+    const show = req.session.showFeedback;
+    debug("show feedback: ", req.session.showFeedback);
+    res.render("contact", {
+      csrfToken: req.csrfToken(),
+      Page: "Contact",
+      showFeedback: show,
+      variable: req.session.variable,
+    });
+  }
+
+  function postFeedback(req, res) {
+    // make insert query
+    const email = req.body.email;
+    const feedback = req.body.comment;
+    const page = "Contact";
+    const good = 1;
+    const complete = 0;
+
+    const qString =
+      "INSERT INTO feedback ( feedback, Email, Page, Good, Complete) Values (?, ?, ?, ?, ?)";
+    getConnection().query(
+      qString,
+      [email, feedback, page, good, complete],
+      (err, results, fields) => {
+        if (err) {
+          console.log("failed to insert product" + err);
+          res.sendStatus(500);
+          return;
+        }
+
+        req.session.showFeedback = false;
+        const show = req.session.showFeedback;
+        debug("show feedback: ", req.session.showFeedback);
+        debug("variable value:", variable);
+        res.render("contact", {
+          csrfToken: req.csrfToken(),
+          Page: page,
+          showFeedback: show,
+          variable: req.session.variable,
+        });
+      }
+    );
+  }
   return {
     getContact,
     postContact,
     getMyContacts,
+    getFeedback,
+    postFeedback,
   };
 }
 module.exports = contactController;

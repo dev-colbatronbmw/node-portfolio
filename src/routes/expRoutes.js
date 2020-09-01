@@ -28,6 +28,8 @@ function router() {
     getPlankCooking,
     getNodeApi,
     getResume,
+    getFeedback,
+    postFeedback,
   } = expController();
 
   expRouter.route("/").get(getExp);
@@ -71,6 +73,9 @@ function router() {
   // node.js Downloads
   expRouter.route("/PlankCooking").get(getPlankCooking);
   expRouter.route("/NodeApi").get(getNodeApi);
+
+  expRouter.route("/Feedback").get(getFeedback);
+  expRouter.route("/Feedback").post(postFeedback);
 
   return expRouter;
 }
