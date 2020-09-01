@@ -98,7 +98,7 @@ function contactController() {
 
         ("use strict");
         const nodemailer = require("nodemailer");
-
+        //----------------email me when signed up --------------------
         // async..await is not allowed in global scope, must use a wrapper
         async function main() {
           // Generate test SMTP service account from ethereal.email
@@ -119,8 +119,8 @@ function contactController() {
           // send mail with defined transport object
           let info = await transporter.sendMail({
             from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
-            to: "dev@colbyholmstead.com", // list of receivers
-            subject: "New Sign Up On Your Website", // Subject line
+            to: `${email}`, // list of receivers
+            subject: "Thank you for signing up!", // Subject line
             text: `
               First Name: ${FirstName}\n
               Last Name: ${LastName}\n
@@ -146,6 +146,55 @@ function contactController() {
         }
 
         main().catch(console.error);
+
+        //------------------------end email me ----------------
+        // ----------------------email registrant -------------------
+        async function secondary() {
+          // Generate test SMTP service account from ethereal.email
+          // Only needed if you don't have a real mail account for testing
+          let testAccount = await nodemailer.createTestAccount();
+
+          // create reusable transporter object using the default SMTP transport
+          let transporter = nodemailer.createTransport({
+            host: "smtp.dreamhost.com",
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+              user: process.env.EMAIL_USER, // generated ethereal user
+              pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+            },
+          });
+
+          // send mail with defined transport object
+          let info = await transporter.sendMail({
+            from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
+            to: "dev@colbyholmstead.com", // list of receivers
+            subject: "New Sign Up On Your Website", // Subject line
+            text: `
+      First Name: ${FirstName}\n
+      Last Name: ${LastName}\n
+     Company: ${Company}\n
+      Zip: ${Zip}\n
+      Phone: ${Phone}\n
+      Email: ${Email}\n
+      How To Contact: ${TypeOfContact}\n
+      Comments: ${Comments}\n
+      ${didContact}
+    `, // plain text body
+            html: `<p>  Name: ${FirstName}
+    ${LastName}<br/>
+    Company: ${Company}<br/>
+    Zip: ${Zip}<br/>
+    Phone: ${Phone}<br/>
+    Email: ${Email}<br/>
+    How To Contact: ${TypeOfContact}<br/>
+    Comments: ${Comments}<br/>
+    ${didContact}
+    </p>`, // html body
+          });
+        }
+
+        secondary().catch(console.error);
 
         res.redirect("/Contact");
       }
