@@ -178,45 +178,6 @@ nav {
   height: 50px;
 }
 //-----end content-----
-//-----foooter-----
-footer {
-  border-top: 2px solid darkgray;
-  // border: 1px solid red;
-  background-color: lightgrey;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-
-  .show {
-    color: $green;
-  }
-  .feedback-hide {
-    display: none;
-  }
-  .row {
-    padding-top: 5px;
-    display: flex;
-    justify-content: space-around;
-  }
-  a {
-    margin: auto;
-    padding: 0;
-    color: $text-white;
-    text-align: center;
-    text-decoration: none;
-    &:hover {
-      color: $hover;
-    }
-  }
-}
-
-.footer-name {
-  display: none;
-  font-weight: bold;
-  color: $green;
-}
-//-----end foooter-----
 
 //-----modifiers-----
 .hide-on-mobile {
@@ -269,6 +230,51 @@ footer {
 }
 
 // ------------ end headshot img ----------------
+//-----foooter-----
+footer {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  border-top: 2px solid darkgray;
+  // border: 1px solid red;
+  background-color: lightgrey;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  .show {
+    color: $green;
+  }
+  .feedback-hide {
+    display: none;
+  }
+
+  a {
+    margin: auto;
+    padding: 0;
+    color: $text-white;
+    text-align: center;
+    text-decoration: none;
+    &:hover {
+      color: $hover;
+    }
+  }
+}
+
+.footer-name {
+  display: none;
+  font-weight: bold;
+  color: $green;
+}
+//-----end foooter-----
+
+@media (min-width: 400px) {
+  .footer-name {
+    display: flex;
+    line-height: 0.06rem;
+    justify-content: center;
+  }
+}
 
 @media (min-width: 560px) {
   // ------------ headshot img ----------------
