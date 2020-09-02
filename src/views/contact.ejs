@@ -13,11 +13,13 @@
             </div>
             <div class="my-form-col-3">
               <input
+             
                 class=""
                 type="text"
                 name="firstName"
                 id="firstName"
-                value=""
+                required
+                oninvalid="this.setCustomValidity('How shall I address you?')"
               />
             </div>
           </div>
@@ -26,16 +28,17 @@
               <label for="lastName">Last Name:&nbsp;</label>
             </div>
             <div class="my-form-col-3">
-              <input type="text" name="lastName" id="lastName" value="" />
+              <input type="text" name="lastName" id="lastName" required
+              oninvalid="this.setCustomValidity('How shall I address you?')"/>
             </div>
           </div>
 
           <div class="my-form-row">
             <div class="my-form-col-1">
-              <label for="zip">Company:&nbsp;</label>
+              <label for="company">Company:&nbsp;</label>
             </div>
             <div class="my-form-col-3">
-              <input type="text" name="company" id="company" value="" />
+              <input type="text" name="company" id="company"  />
             </div>
           </div>
 
@@ -44,7 +47,7 @@
               <label for="zip">Zip:&nbsp;</label>
             </div>
             <div class="my-form-col-3">
-              <input type="text" name="zip" id="zip" value="" />
+              <input type="number" name="zip" id="zip"  />
             </div>
           </div>
           <div class="my-form-row">
@@ -52,7 +55,7 @@
               <label for="phone">Phone:&nbsp;</label>
             </div>
             <div class="my-form-col-3">
-              <input type="text" name="phone" id="phone" value="" />
+              <input type="phone" name="phone" id="phone" />
             </div>
           </div>
           <div class="my-form-row">
@@ -60,7 +63,7 @@
               <label for="email">Email:&nbsp;</label>
             </div>
             <div class="my-form-col-3">
-              <input type="text" name="email" id="email" value="" />
+              <input type="email" name="email" id="email" required oninvalid="this.setCustomValidity('I need to be able to email to you') "/>
              
    </div>  
   
