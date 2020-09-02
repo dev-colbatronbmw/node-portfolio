@@ -1,14 +1,17 @@
 $text-white: white;
+$disabled: rgb(139, 139, 139);
 $hover: rgb(55, 117, 43);
 $green: rgb(55, 117, 43);
 
 $mobile-font-sizes: (
   "title": 3rem,
   "link": 1.5rem,
+  "lang": 0.5rem,
 );
 
 $desktop-font-sizes: (
   "name": 4rem,
   "title": 4.3rem,
   "link": 2rem,
+  "lang": 0.8rem,
 );

@@ -3,7 +3,6 @@ require("dotenv/config");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-// const csurf = require("csurf");
 const nodemailer = require("nodemailer");
 
 const pool = mysql.createPool({
@@ -69,7 +68,12 @@ function contactController() {
     const TypeOfContact = req.body.TypeOfContact;
     const Comments = req.body.comment;
     const Contacted = 0;
-
+    var didContact = "";
+    if (Contacted === 0) {
+      didContact = "Not Contacted";
+    } else {
+      didContact = "Contacted";
+    }
     const qString =
       "INSERT INTO contacts (FirstName, LastName, Company, Zip, Phone, Email, TypeOfContact, Comments, Contacted) Values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     getConnection().query(
@@ -92,7 +96,105 @@ function contactController() {
           return;
         }
 
-        debug("Form: ", "Sent");
+        ("use strict");
+        const nodemailer = require("nodemailer");
+        //----------------email me when signed up --------------------
+        // async..await is not allowed in global scope, must use a wrapper
+        async function main() {
+          // Generate test SMTP service account from ethereal.email
+          // Only needed if you don't have a real mail account for testing
+          let testAccount = await nodemailer.createTestAccount();
+
+          // create reusable transporter object using the default SMTP transport
+          let transporter = nodemailer.createTransport({
+            host: "smtp.dreamhost.com",
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+              user: process.env.EMAIL_USER, // generated ethereal user
+              pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+            },
+          });
+
+          // send mail with defined transport object
+          let info = await transporter.sendMail({
+            from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
+            to: `${email}`, // list of receivers
+            subject: "Thank you for signing up!", // Subject line
+            text: `
+              First Name: ${FirstName}\n
+              Last Name: ${LastName}\n
+             Company: ${Company}\n
+              Zip: ${Zip}\n
+              Phone: ${Phone}\n
+              Email: ${Email}\n
+              How To Contact: ${TypeOfContact}\n
+              Comments: ${Comments}\n
+              ${didContact}
+            `, // plain text body
+            html: `<p>  Name: ${FirstName}
+            ${LastName}<br/>
+            Company: ${Company}<br/>
+            Zip: ${Zip}<br/>
+            Phone: ${Phone}<br/>
+            Email: ${Email}<br/>
+            How To Contact: ${TypeOfContact}<br/>
+            Comments: ${Comments}<br/>
+            ${didContact}
+            </p>`, // html body
+          });
+        }
+
+        main().catch(console.error);
+
+        //------------------------end email me ----------------
+        // ----------------------email registrant -------------------
+        async function secondary() {
+          // Generate test SMTP service account from ethereal.email
+          // Only needed if you don't have a real mail account for testing
+          let testAccount = await nodemailer.createTestAccount();
+
+          // create reusable transporter object using the default SMTP transport
+          let transporter = nodemailer.createTransport({
+            host: "smtp.dreamhost.com",
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+              user: process.env.EMAIL_USER, // generated ethereal user
+              pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+            },
+          });
+
+          // send mail with defined transport object
+          let info = await transporter.sendMail({
+            from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
+            to: "dev@colbyholmstead.com", // list of receivers
+            subject: "New Sign Up On Your Website", // Subject line
+            text: `
+      First Name: ${FirstName}\n
+      Last Name: ${LastName}\n
+     Company: ${Company}\n
+      Zip: ${Zip}\n
+      Phone: ${Phone}\n
+      Email: ${Email}\n
+      How To Contact: ${TypeOfContact}\n
+      Comments: ${Comments}\n
+      ${didContact}
+    `, // plain text body
+            html: `<p>  Name: ${FirstName}
+    ${LastName}<br/>
+    Company: ${Company}<br/>
+    Zip: ${Zip}<br/>
+    Phone: ${Phone}<br/>
+    Email: ${Email}<br/>
+    How To Contact: ${TypeOfContact}<br/>
+    Comments: ${Comments}<br/>
+    ${didContact}
+    </p>`, // html body
+          });
+        }
+
+        secondary().catch(console.error);
 
         res.redirect("/Contact");
       }
@@ -126,6 +228,51 @@ function contactController() {
           res.sendStatus(500);
           return;
         }
+
+        ("use strict");
+        const nodemailer = require("nodemailer");
+
+        // async..await is not allowed in global scope, must use a wrapper
+        async function main() {
+          // Generate test SMTP service account from ethereal.email
+          // Only needed if you don't have a real mail account for testing
+          let testAccount = await nodemailer.createTestAccount();
+
+          // create reusable transporter object using the default SMTP transport
+          let transporter = nodemailer.createTransport({
+            host: "smtp.dreamhost.com",
+            port: 465,
+            secure: true, // true for 465, false for other ports
+            auth: {
+              user: process.env.EMAIL_USER, // generated ethereal user
+              pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+            },
+          });
+
+          // send mail with defined transport object
+          let info = await transporter.sendMail({
+            from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
+            to: "dev@colbyholmstead.com", // list of receivers
+            subject: "New FeedBack", // Subject line
+            text: `
+              Email: ${email}\n
+             Feedback: ${feedback}\n
+             Page Sent from: ${page}\n
+              Is the feedback good?: ${good}\n
+              Completed: ${complete}\n
+           
+            `, // plain text body
+            html: `<p>   
+             Email: &nbsp ${email}<br/>
+            Feedback: &nbsp  ${feedback}<br/>
+            Page Sent from: &nbsp  ${page}<br/>
+             Is the feedback good?: &nbsp  ${good}<br/>
+             Completed: &nbsp  ${complete}<br/>
+            </p>`, // html body
+          });
+        }
+
+        main().catch(console.error);
 
         req.session.variable = "hide";
         res.render("contact", {
