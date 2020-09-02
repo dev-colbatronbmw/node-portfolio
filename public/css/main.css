@@ -186,7 +186,7 @@ html {
 .name,
 .title {
   height: auto;
-  font-size: 3rem;
+  font-size: 2.9rem;
 }
 
 .links {
@@ -195,7 +195,7 @@ html {
       -ms-flex-direction: column;
           flex-direction: column;
   height: 40%;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .under-construction {
