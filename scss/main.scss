@@ -59,6 +59,14 @@ html {
   height: 40%;
   font-size: map-get($mobile-font-sizes, link);
 }
+.under-construction {
+  display: none;
+}
+
+.lang {
+  font-size: map-get($mobile-font-sizes, lang);
+  transition-duration: 0.5s;
+}
 a {
   margin: auto;
   padding: 0;
@@ -67,22 +75,49 @@ a {
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  transition-duration: 0.2s;
   &:hover {
-    color: $text-white;
     transition-duration: 0.5s;
     text-shadow: 1px 1px 1px #000000, 10px 20px 15px #000000,
       -4px -4px 15px #000000;
+    font-size: 34px;
   }
 }
+
+.disabled-link {
+  &:hover {
+    .under-construction {
+      font-size: 20px;
+      transition-duration: 0.5s;
+      color: $text-white;
+    }
+    .framework {
+      font-size: 30px;
+      transition-duration: 0.5s;
+    }
+    .lang {
+      font-size: 20px;
+    }
+    transition-duration: 0s;
+    color: $disabled;
+  }
+}
+.enabled-link {
+  &:hover {
+    .under-construction {
+      transition-duration: 0.5s;
+      color: $text-white;
+    }
+    .lang {
+      font-size: 20px;
+    }
+    transition-duration: 0s;
+  }
+}
+
 p {
   margin: 0;
   padding: 0;
-}
-.under-construction {
-  display: none;
-}
-.lang {
-  font-size: map-get($mobile-font-sizes, lang);
 }
 
 @media (min-width: 600px) {
@@ -104,7 +139,7 @@ p {
   }
   .under-construction {
     display: inline;
-    color: rgb(175, 175, 175);
+    color: $disabled;
     font-size: map-get($desktop-font-sizes, lang);
   }
 }

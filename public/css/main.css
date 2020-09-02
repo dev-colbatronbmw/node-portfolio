@@ -198,6 +198,16 @@ html {
   font-size: 1.5rem;
 }
 
+.under-construction {
+  display: none;
+}
+
+.lang {
+  font-size: 0.5rem;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+
 a {
   margin: auto;
   padding: 0;
@@ -211,26 +221,58 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-transition-duration: 0.2s;
+          transition-duration: 0.2s;
 }
 
 a:hover {
-  color: white;
   -webkit-transition-duration: 0.5s;
           transition-duration: 0.5s;
   text-shadow: 1px 1px 1px #000000, 10px 20px 15px #000000, -4px -4px 15px #000000;
+  font-size: 34px;
+}
+
+.disabled-link:hover {
+  -webkit-transition-duration: 0s;
+          transition-duration: 0s;
+  color: #8b8b8b;
+}
+
+.disabled-link:hover .under-construction {
+  font-size: 20px;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  color: white;
+}
+
+.disabled-link:hover .framework {
+  font-size: 30px;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+}
+
+.disabled-link:hover .lang {
+  font-size: 20px;
+}
+
+.enabled-link:hover {
+  -webkit-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+.enabled-link:hover .under-construction {
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  color: white;
+}
+
+.enabled-link:hover .lang {
+  font-size: 20px;
 }
 
 p {
   margin: 0;
   padding: 0;
-}
-
-.under-construction {
-  display: none;
-}
-
-.lang {
-  font-size: 0.5rem;
 }
 
 @media (min-width: 600px) {
@@ -255,7 +297,7 @@ p {
   }
   .under-construction {
     display: inline;
-    color: #afafaf;
+    color: #8b8b8b;
     font-size: 0.8rem;
   }
 }
