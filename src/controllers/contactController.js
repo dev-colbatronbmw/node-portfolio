@@ -3,6 +3,7 @@ require("dotenv/config");
 const mysql = require("mysql");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+("use strict");
 const nodemailer = require("nodemailer");
 
 const pool = mysql.createPool({
@@ -168,29 +169,20 @@ function contactController() {
           // send mail with defined transport object
           let info = await transporter.sendMail({
             from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
-            to: "dev@colbyholmstead.com", // list of receivers
-            subject: "New Sign Up On Your Website", // Subject line
+            to: `${Email}`, // list of receivers
+            subject: "Thank You", // Subject line
             text: `
-      First Name: ${FirstName}\n
-      Last Name: ${LastName}\n
-     Company: ${Company}\n
-      Zip: ${Zip}\n
-      Phone: ${Phone}\n
-      Email: ${Email}\n
-      How To Contact: ${TypeOfContact}\n
-      Comments: ${Comments}\n
-      ${didContact}
+       ${FirstName} ${LastName}\n
+   
+       Thank you for your interest! \n
+      I will get back to you as soon as possible.
     `, // plain text body
-            html: `<p>  Name: ${FirstName}
-    ${LastName}<br/>
-    Company: ${Company}<br/>
-    Zip: ${Zip}<br/>
-    Phone: ${Phone}<br/>
-    Email: ${Email}<br/>
-    How To Contact: ${TypeOfContact}<br/>
-    Comments: ${Comments}<br/>
-    ${didContact}
-    </p>`, // html body
+            html: `<p> 
+            
+            ${FirstName} ${LastName}<br/>
+   
+            Thank you for your interest! <br/>
+           I will get back to you as soon as possible.</p>`, // html body
           });
         }
 
@@ -229,27 +221,17 @@ function contactController() {
           return;
         }
 
-        ("use strict");
-        const nodemailer = require("nodemailer");
-
-        // async..await is not allowed in global scope, must use a wrapper
         async function main() {
-          // Generate test SMTP service account from ethereal.email
-          // Only needed if you don't have a real mail account for testing
           let testAccount = await nodemailer.createTestAccount();
-
-          // create reusable transporter object using the default SMTP transport
           let transporter = nodemailer.createTransport({
             host: "smtp.dreamhost.com",
             port: 465,
-            secure: true, // true for 465, false for other ports
+            secure: true,
             auth: {
-              user: process.env.EMAIL_USER, // generated ethereal user
-              pass: process.env.EMAIL_PASSWORD, // generated ethereal password
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_PASSWORD,
             },
           });
-
-          // send mail with defined transport object
           let info = await transporter.sendMail({
             from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
             to: "dev@colbyholmstead.com", // list of receivers
@@ -273,6 +255,35 @@ function contactController() {
         }
 
         main().catch(console.error);
+        async function secondary() {
+          let testAccount = await nodemailer.createTestAccount();
+          let transporter = nodemailer.createTransport({
+            host: "smtp.dreamhost.com",
+            port: 465,
+            secure: true,
+            auth: {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_PASSWORD,
+            },
+          });
+          let info = await transporter.sendMail({
+            from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
+            to: `${email}`, // list of receivers
+            subject: "Feedback to Colby Holmstead", // Subject line
+            text: `
+            So you want me to look at:  \n 
+           ${feedback} \n
+           I can fix that no Problem. (Probably)\n \n
+            I will let you know when I do. 
+            `, // plain text body
+            html: `<p>   
+            So you want me to look at:<br/> ${feedback}<br/> <br/>  I can fix that no Problem. (Probably)<br/><br/>
+            I will let you know when I do. 
+            </p>`, // html body
+          });
+        }
+
+        secondary().catch(console.error);
 
         req.session.variable = "hide";
         res.render("contact", {

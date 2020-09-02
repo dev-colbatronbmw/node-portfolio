@@ -231,10 +231,6 @@ nav li {
   font-size: 2rem;
 }
 
-.danger {
-  color: red;
-}
-
 .content {
   height: 100%;
   width: 90vw;
@@ -244,7 +240,7 @@ nav li {
 }
 
 .content p {
-  padding: 1rem;
+  padding: 0.5rem;
   text-align: left;
 }
 
@@ -370,6 +366,11 @@ nav li {
 
 .comment {
   height: 50px;
+}
+
+.content .danger {
+  color: red;
+  text-align: center;
 }
 
 .hide-on-mobile {

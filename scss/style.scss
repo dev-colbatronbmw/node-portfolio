@@ -87,9 +87,7 @@ nav {
 
 // ------- end nav --------
 //-----content-----
-.danger {
-  color: red;
-}
+
 .content {
   // padding: 1rem;
   // padding-bottom: 4rem;
@@ -98,7 +96,7 @@ nav {
   max-width: 1080px;
   box-shadow: 5px 10px 18px #9b9b9bd3;
   p {
-    padding: 1rem;
+    padding: 0.5rem;
     text-align: left;
   }
   &:nth-child(odd) {
@@ -177,6 +175,13 @@ nav {
 .comment {
   height: 50px;
 }
+.content {
+  .danger {
+    color: red;
+    text-align: center;
+  }
+}
+
 //-----end content-----
 
 //-----modifiers-----
