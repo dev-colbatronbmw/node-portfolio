@@ -65,13 +65,24 @@ a {
   color: $text-white;
   text-align: center;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
   &:hover {
     color: $text-white;
+    transition-duration: 0.5s;
+    text-shadow: 1px 1px 1px #000000, 10px 20px 15px #000000,
+      -4px -4px 15px #000000;
   }
 }
 p {
   margin: 0;
   padding: 0;
+}
+.under-construction {
+  display: none;
+}
+.lang {
+  font-size: map-get($mobile-font-sizes, lang);
 }
 
 @media (min-width: 600px) {
@@ -87,5 +98,13 @@ p {
     flex-direction: row;
     height: 40%;
     font-size: map-get($desktop-font-sizes, link);
+  }
+  .lang {
+    font-size: map-get($desktop-font-sizes, lang);
+  }
+  .under-construction {
+    display: inline;
+    color: rgb(175, 175, 175);
+    font-size: map-get($desktop-font-sizes, lang);
   }
 }

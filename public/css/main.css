@@ -204,15 +204,33 @@ a {
   color: white;
   text-align: center;
   text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 a:hover {
   color: white;
+  -webkit-transition-duration: 0.5s;
+          transition-duration: 0.5s;
+  text-shadow: 1px 1px 1px #000000, 10px 20px 15px #000000, -4px -4px 15px #000000;
 }
 
 p {
   margin: 0;
   padding: 0;
+}
+
+.under-construction {
+  display: none;
+}
+
+.lang {
+  font-size: 0.5rem;
 }
 
 @media (min-width: 600px) {
@@ -231,6 +249,14 @@ p {
             flex-direction: row;
     height: 40%;
     font-size: 2rem;
+  }
+  .lang {
+    font-size: 0.8rem;
+  }
+  .under-construction {
+    display: inline;
+    color: #afafaf;
+    font-size: 0.8rem;
   }
 }
 /*# sourceMappingURL=main.css.map */
