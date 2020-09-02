@@ -411,6 +411,7 @@ footer a:hover {
 }
 
 .footer-name {
+  display: none;
   font-weight: bold;
   color: #37752b;
 }

@@ -5,6 +5,10 @@
   border: 1px solid blue;
 }
 
+//--------- landing page ------
+
+//--------- end landing page ------
+
 .container {
   // border: 1px solid blue;
 
@@ -208,6 +212,7 @@ footer {
 }
 
 .footer-name {
+  display: none;
   font-weight: bold;
   color: $green;
 }
