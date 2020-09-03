@@ -198,7 +198,11 @@ function contactController() {
     } else {
       req.session.variable = "hide";
     }
-    res.redirect("/Contact");
+    res.render("contact", {
+      Page: "Contact",
+      csrfToken: req.csrfToken(),
+      variable: req.session.variable,
+    });
   }
 
   function postFeedback(req, res) {

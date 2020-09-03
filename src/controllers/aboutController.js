@@ -33,7 +33,11 @@ function aboutController() {
     } else {
       req.session.variable = "hide";
     }
-    res.redirect("/About");
+    res.render("about", {
+      csrfToken: req.csrfToken(),
+      Page: "About",
+      variable: req.session.variable,
+    });
   }
 
   function postFeedback(req, res) {
