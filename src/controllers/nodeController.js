@@ -30,17 +30,19 @@ function nodeController() {
     });
   }
   function getFeedback(req, res) {
-    if (req.session.variable === "hide") {
+    var feedback = req.session.variable;
+
+    if (feedback === "hide") {
       req.session.variable = "show";
+      feedback = "show";
     } else {
       req.session.variable = "hide";
+      feedback = "hide";
     }
-    debug("variable value:", req.session.variable);
-    debug("show feedback: ", req.session.showFeedback);
     res.render("node", {
       csrfToken: req.csrfToken(),
       Page: "Node",
-      variable: req.session.variable,
+      variable: feedback,
     });
   }
 

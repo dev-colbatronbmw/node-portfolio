@@ -142,15 +142,19 @@ function expController() {
     res.download(file);
   }
   function getFeedback(req, res) {
-    if (req.session.variable === "hide") {
+    var feedback = req.session.variable;
+
+    if (feedback === "hide") {
       req.session.variable = "show";
+      feedback = "show";
     } else {
       req.session.variable = "hide";
+      feedback = "hide";
     }
     res.render("exp", {
       Page: "Exp",
       csrfToken: req.csrfToken(),
-      variable: req.session.variable,
+      variable: feedback,
     });
   }
 
