@@ -147,7 +147,11 @@ function expController() {
     } else {
       req.session.variable = "hide";
     }
-    res.redirect("/Exp");
+    res.render("exp", {
+      Page: "Exp",
+      csrfToken: req.csrfToken(),
+      variable: req.session.variable,
+    });
   }
 
   function postFeedback(req, res) {
