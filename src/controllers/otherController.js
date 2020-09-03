@@ -29,15 +29,19 @@ function otherController() {
     });
   }
   function getFeedback(req, res) {
-    if (req.session.variable === "hide") {
+    var feedback = req.session.variable;
+
+    if (feedback === "hide") {
       req.session.variable = "show";
+      feedback = "show";
     } else {
       req.session.variable = "hide";
+      feedback = "hide";
     }
     res.render("other", {
       csrfToken: req.csrfToken(),
       Page: "Other",
-      variable: req.session.variable,
+      variable: feedback,
     });
   }
 

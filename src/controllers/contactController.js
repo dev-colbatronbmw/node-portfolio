@@ -193,15 +193,19 @@ function contactController() {
     );
   }
   function getFeedback(req, res) {
-    if (req.session.variable === "hide") {
+    var feedback = req.session.variable;
+
+    if (feedback === "hide") {
       req.session.variable = "show";
+      feedback = "show";
     } else {
       req.session.variable = "hide";
+      feedback = "hide";
     }
     res.render("contact", {
       Page: "Contact",
       csrfToken: req.csrfToken(),
-      variable: req.session.variable,
+      variable: feedback,
     });
   }
 
