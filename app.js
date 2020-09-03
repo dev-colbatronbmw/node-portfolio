@@ -18,15 +18,15 @@ var db = mysql.createConnection({
   database: process.env.DATABASE,
 });
 
-db.connect(function (err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-  debug("connected to Database");
-});
+// db.connect(function (err) {
+//   if (err) {
+//     console.error("error connecting: " + err.stack);
+//     return;
+//   }
+//   debug("connected to Database");
+// });
 
-db.end();
+// db.end();
 const app = express();
 
 app.set("views", path.join(__dirname, "src", "views"));
