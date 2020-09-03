@@ -34,7 +34,11 @@ function otherController() {
     } else {
       req.session.variable = "hide";
     }
-    res.redirect("/Other");
+    res.render("other", {
+      csrfToken: req.csrfToken(),
+      Page: "Other",
+      variable: req.session.variable,
+    });
   }
 
   function postFeedback(req, res) {

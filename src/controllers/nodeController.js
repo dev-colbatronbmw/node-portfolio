@@ -37,7 +37,11 @@ function nodeController() {
     }
     debug("variable value:", req.session.variable);
     debug("show feedback: ", req.session.showFeedback);
-    res.redirect("/Node");
+    res.render("node", {
+      csrfToken: req.csrfToken(),
+      Page: "Node",
+      variable: req.session.variable,
+    });
   }
 
   function postFeedback(req, res) {
