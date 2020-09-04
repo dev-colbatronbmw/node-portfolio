@@ -120,7 +120,7 @@ function contactController() {
           // send mail with defined transport object
           let info = await transporter.sendMail({
             from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
-            to: `${email}`, // list of receivers
+            to: "dev@colbyholmstead.com", // list of receivers
             subject: "Thank you for signing up!", // Subject line
             text: `
               First Name: ${FirstName}\n
