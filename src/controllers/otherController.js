@@ -20,6 +20,10 @@ function otherController() {
   debug("other controller: ", "working");
 
   function getOther(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get other: ", "Working");
 
     res.render("other", {
@@ -33,7 +37,6 @@ function otherController() {
       "Cache-Control",
       "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
     );
-    var feedback = req.session.variable;
 
     req.session.variable = "show";
     res.redirect("/Other");

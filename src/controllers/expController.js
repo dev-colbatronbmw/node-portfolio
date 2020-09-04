@@ -21,6 +21,10 @@ function expController() {
   debug("exp controller: ", "working");
 
   function getExp(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get exp: ", "Working");
 
     res.render("exp", {
@@ -146,7 +150,6 @@ function expController() {
       "Cache-Control",
       "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
     );
-    var feedback = req.session.variable;
 
     req.session.variable = "show";
     res.redirect("/Exp");
