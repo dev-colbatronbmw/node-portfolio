@@ -177,6 +177,16 @@ code {
   background-color: #262626;
 }
 
+.nav-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -195,16 +205,14 @@ nav img {
   width: 2.4rem;
 }
 
-nav .brand-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+nav .row {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-nav a {
+nav a,
+nav .dropbtn {
   margin: auto;
   padding: 0;
   color: white;
@@ -212,18 +220,66 @@ nav a {
   text-decoration: none;
 }
 
-nav a:hover {
+nav a:hover,
+nav .dropbtn:hover {
   color: #37752b;
 }
 
-nav ul {
+nav .nav-links {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-nav li {
+nav .nav-links div {
   margin: 10px;
+}
+
+nav .dropdown {
+  overflow: hidden;
+}
+
+nav .dropdown .dropbtn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #262626;
+  font-family: inherit;
+  margin: 0;
+}
+
+nav .navbar a:hover,
+nav .dropdown:hover .dropbtn,
+nav .dropbtn:focus {
+  color: #37752b;
+}
+
+nav .dropdown-content {
+  width: 300px;
+  margin-bottom: 10px;
+  display: none;
+  color: white;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+nav .dropdown-content a {
+  text-decoration: none;
+  display: block;
+}
+
+nav .dropdown-content a:hover {
+  color: #37752b;
+}
+
+nav .drop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .brand {
@@ -499,11 +555,20 @@ footer a:hover {
   }
 }
 
+@media (min-width: 650px) {
+  .nav-row {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
 @media (min-width: 760px) {
   .pic {
     width: 700px;
   }
-  nav {
+  .nav {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;

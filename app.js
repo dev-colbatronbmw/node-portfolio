@@ -55,6 +55,7 @@ app.use(csrfMiddleware);
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public", "css")));
+app.use(express.static(path.join(__dirname, "public", "js")));
 app.use(
   "/css",
   express.static(
