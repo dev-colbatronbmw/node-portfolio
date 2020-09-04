@@ -33,10 +33,18 @@ function nodeController() {
     var feedback = req.session.variable;
 
     req.session.variable = "show";
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     res.redirect("/Node");
   }
 
   function getFeedback(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     req.session.variable = "hide";
 
     res.redirect("/Node");

@@ -29,12 +29,19 @@ function aboutController() {
   }
   function getFeedbackShow(req, res) {
     var feedback = req.session.variable;
-
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     req.session.variable = "show";
     res.redirect("/About");
   }
 
   function getFeedback(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     req.session.variable = "hide";
 
     res.redirect("/About");

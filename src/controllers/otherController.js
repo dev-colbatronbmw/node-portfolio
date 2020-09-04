@@ -29,6 +29,10 @@ function otherController() {
     });
   }
   function getFeedbackShow(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     var feedback = req.session.variable;
 
     req.session.variable = "show";
@@ -36,6 +40,10 @@ function otherController() {
   }
 
   function getFeedback(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     req.session.variable = "hide";
 
     res.redirect("/Other");
