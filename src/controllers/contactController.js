@@ -310,7 +310,7 @@ function contactController() {
   return {
     getContact,
     postContact,
-    getMyContacts,
+    // getMyContacts,
     getFeedback,
     getFeedbackShow,
     postFeedback,
