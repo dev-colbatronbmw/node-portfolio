@@ -22,6 +22,10 @@ function contactController() {
   const Page = "Contact";
 
   function getContact(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get Contact: ", "Working");
     res.render("contact", {
       Page: "Contact",
@@ -193,8 +197,6 @@ function contactController() {
     );
   }
   function getFeedbackShow(req, res) {
-    var feedback = req.session.variable;
-
     res.header(
       "Cache-Control",
       "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"

@@ -22,6 +22,10 @@ function nodeController() {
   debug("node controller: ", "working");
 
   function getNode(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get node: ", "Working");
     res.render("node", {
       csrfToken: req.csrfToken(),
@@ -30,8 +34,6 @@ function nodeController() {
     });
   }
   function getFeedbackShow(req, res) {
-    var feedback = req.session.variable;
-
     req.session.variable = "show";
     res.header(
       "Cache-Control",
