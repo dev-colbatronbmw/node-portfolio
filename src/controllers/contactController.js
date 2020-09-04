@@ -34,34 +34,34 @@ function contactController() {
     });
   }
 
-  function getMyContacts(req, res) {
-    const connection = getConnection();
+  // function getMyContacts(req, res) {
+  //   const connection = getConnection();
 
-    const qString = "SELECT * FROM contacts";
-    connection.query(qString, (err, rows, fields) => {
-      if (err) {
-        console.log("Failed to query for products" + err);
-        res.sendStatus(500);
-        res.end();
-        return;
-      }
-      const contacts = rows.map((row) => {
-        return {
-          FirstName: row.FirstName,
-          lastName: row.LastName,
-          Email: row.Email,
-          Company: row.Company,
-          Zip: row.Zip,
-          Comments: row.Comments,
-          Phone: row.Phone,
-          TypeOfContact: row.TypeOfContact,
-          Contacted: row.Contacted,
-        };
-      });
+  //   const qString = "SELECT * FROM contacts";
+  //   connection.query(qString, (err, rows, fields) => {
+  //     if (err) {
+  //       console.log("Failed to query for products" + err);
+  //       res.sendStatus(500);
+  //       res.end();
+  //       return;
+  //     }
+  //     const contacts = rows.map((row) => {
+  //       return {
+  //         FirstName: row.FirstName,
+  //         lastName: row.LastName,
+  //         Email: row.Email,
+  //         Company: row.Company,
+  //         Zip: row.Zip,
+  //         Comments: row.Comments,
+  //         Phone: row.Phone,
+  //         TypeOfContact: row.TypeOfContact,
+  //         Contacted: row.Contacted,
+  //       };
+  //     });
 
-      res.json(contacts);
-    });
-  }
+  //     res.json(contacts);
+  //   });
+  // }
 
   function postContact(req, res) {
     const FirstName = req.body.firstName;
