@@ -29,21 +29,17 @@ function nodeController() {
       variable: req.session.variable,
     });
   }
-  function getFeedback(req, res) {
+  function getFeedbackShow(req, res) {
     var feedback = req.session.variable;
 
-    if (feedback === "hide") {
-      req.session.variable = "show";
-      feedback = "show";
-    } else {
-      req.session.variable = "hide";
-      feedback = "hide";
-    }
-    res.render("node", {
-      csrfToken: req.csrfToken(),
-      Page: "Node",
-      variable: feedback,
-    });
+    req.session.variable = "show";
+    res.redirect("/Node");
+  }
+
+  function getFeedback(req, res) {
+    req.session.variable = "hide";
+
+    res.redirect("/Node");
   }
 
   function postFeedback(req, res) {
@@ -136,6 +132,7 @@ function nodeController() {
   return {
     getNode,
     getFeedback,
+    getFeedbackShow,
     postFeedback,
   };
 }
