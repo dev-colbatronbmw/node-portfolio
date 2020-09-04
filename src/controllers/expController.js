@@ -141,21 +141,17 @@ function expController() {
     const file = "./projects/node/nodeapi.zip";
     res.download(file);
   }
-  function getFeedback(req, res) {
+  function getFeedbackShow(req, res) {
     var feedback = req.session.variable;
 
-    if (feedback === "hide") {
-      req.session.variable = "show";
-      feedback = "show";
-    } else {
-      req.session.variable = "hide";
-      feedback = "hide";
-    }
-    res.render("exp", {
-      Page: "Exp",
-      csrfToken: req.csrfToken(),
-      variable: feedback,
-    });
+    req.session.variable = "show";
+    res.redirect("/Exp");
+  }
+
+  function getFeedback(req, res) {
+    req.session.variable = "hide";
+
+    res.redirect("/Exp");
   }
 
   function postFeedback(req, res) {
@@ -270,6 +266,7 @@ function expController() {
     getNodeApi,
     getResume,
     getFeedback,
+    getFeedbackShow,
     postFeedback,
   };
 }

@@ -28,21 +28,17 @@ function otherController() {
       variable: req.session.variable,
     });
   }
-  function getFeedback(req, res) {
+  function getFeedbackShow(req, res) {
     var feedback = req.session.variable;
 
-    if (feedback === "hide") {
-      req.session.variable = "show";
-      feedback = "show";
-    } else {
-      req.session.variable = "hide";
-      feedback = "hide";
-    }
-    res.render("other", {
-      csrfToken: req.csrfToken(),
-      Page: "Other",
-      variable: feedback,
-    });
+    req.session.variable = "show";
+    res.redirect("/Other");
+  }
+
+  function getFeedback(req, res) {
+    req.session.variable = "hide";
+
+    res.redirect("/Other");
   }
 
   function postFeedback(req, res) {
@@ -135,6 +131,7 @@ function otherController() {
   return {
     getOther,
     getFeedback,
+    getFeedbackShow,
     postFeedback,
   };
 }
