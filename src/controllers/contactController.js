@@ -121,7 +121,7 @@ function contactController() {
           let info = await transporter.sendMail({
             from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
             to: "dev@colbyholmstead.com", // list of receivers
-            subject: "Thank you for signing up!", // Subject line
+            subject: "New Registrant", // Subject line
             text: `
               First Name: ${FirstName}\n
               Last Name: ${LastName}\n
@@ -192,21 +192,17 @@ function contactController() {
       }
     );
   }
-  function getFeedback(req, res) {
+  function getFeedbackShow(req, res) {
     var feedback = req.session.variable;
 
-    if (feedback === "hide") {
-      req.session.variable = "show";
-      feedback = "show";
-    } else {
-      req.session.variable = "hide";
-      feedback = "hide";
-    }
-    res.render("contact", {
-      Page: "Contact",
-      csrfToken: req.csrfToken(),
-      variable: feedback,
-    });
+    req.session.variable = "show";
+    res.redirect("/Contact");
+  }
+
+  function getFeedback(req, res) {
+    req.session.variable = "hide";
+
+    res.redirect("/Contact");
   }
 
   function postFeedback(req, res) {
@@ -307,6 +303,7 @@ function contactController() {
     postContact,
     getMyContacts,
     getFeedback,
+    getFeedbackShow,
     postFeedback,
   };
 }
