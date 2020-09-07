@@ -1,0 +1,51 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">Register</h3>
+  <div class="row justify-center">
+    <div class="content ">
+    
+      <form action="/User/Register" method="POST">
+        <div class="my-form">
+            <div class="row align-center justify-center">
+                <div class="my-form-col-1">
+                  <label for="name">Name:&nbsp;</label>
+                </div>
+                <div class="my-form-col-3">
+                  <input type="text" name="name" id="name" required oninvalid="this.setCustomValidity('You have to put in a name') "/>
+    
+    </div>  
+      </div> 
+    
+      <div class="row  align-center justify-center">
+            <div class="my-form-col-1">
+              <label for="email">Email:&nbsp;</label>
+            </div>
+            <div class="my-form-col-3">
+              <input type="email" name="email" id="email" required oninvalid="this.setCustomValidity('You have to put in an Email') "/>
+
+</div>  
+  </div> 
+   
+  <div class="row align-center justify-center">
+    <div class="">
+      <label for="password">Password:&nbsp;</label>
+    </div>
+    <div class="">
+      <input type="password" name="password" id="password" required oninvalid="this.setCustomValidity('We All Keep Secrets') "/>
+
+</div>  
+</div> 
+
+
+  <input class="green" type="Submit" value="Sign Up"> 
+</div>  
+
+
+<input type="hidden" name="_csrf" value="<%=csrfToken%>">
+   </form>
+  </div> 
+  </div>
+  </div>
+</div>
+<%-include("../shared/footer")%>

@@ -55,6 +55,7 @@ app.use(csrfMiddleware);
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public", "css")));
+app.use(express.static(path.join(__dirname, "public", "js")));
 app.use(
   "/css",
   express.static(
@@ -68,6 +69,10 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/jquery/dist")),
   express.static(path.join(__dirname, "/node_modules/popper.js/dist"))
 );
+
+const userRouter = require("./src/routes/userRoutes")();
+
+app.use("/User", userRouter);
 
 const otherRouter = require("./src/routes/otherRoutes")();
 
