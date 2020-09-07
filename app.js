@@ -70,6 +70,10 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/popper.js/dist"))
 );
 
+const userRouter = require("./src/routes/userRoutes")();
+
+app.use("/User", userRouter);
+
 const otherRouter = require("./src/routes/otherRoutes")();
 
 app.use("/Other", otherRouter);
