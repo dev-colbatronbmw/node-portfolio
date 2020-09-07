@@ -267,10 +267,19 @@ nav .dropdown-content {
 
 nav .dropdown-content a {
   text-decoration: none;
+  display: inherit;
 }
 
 nav .dropdown-content a:hover {
   color: #37752b;
+}
+
+nav div.drop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 nav .drop {

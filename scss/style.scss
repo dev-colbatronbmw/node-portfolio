@@ -116,11 +116,15 @@ nav {
 
   .dropdown-content a {
     text-decoration: none;
-    // display: block;
+    display: inherit;
   }
 
   .dropdown-content a:hover {
     color: $green;
+  }
+  div.drop {
+    display: flex;
+    justify-content: space-around;
   }
 
   .drop {
