@@ -87,7 +87,6 @@ td {
 ul,
 menu,
 dir {
-  display: block;
   list-style-type: disc;
   -webkit-margin-before: 0;
   margin-block-start: 0;
@@ -256,7 +255,7 @@ nav .dropbtn:focus {
 }
 
 nav .dropdown-content {
-  width: 300px;
+  width: 100%;
   margin-bottom: 10px;
   display: none;
   color: white;
@@ -267,27 +266,32 @@ nav .dropdown-content {
 
 nav .dropdown-content a {
   text-decoration: none;
-  display: inherit;
 }
 
 nav .dropdown-content a:hover {
   color: #37752b;
 }
 
-nav div.drop {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-}
-
 nav .drop {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+nav .drop .row {
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .brand {

@@ -107,7 +107,7 @@ nav {
   }
 
   .dropdown-content {
-    width: 300px;
+    width: 100%;
     margin-bottom: 10px;
     display: none;
     color: $text-white;
@@ -116,20 +116,24 @@ nav {
 
   .dropdown-content a {
     text-decoration: none;
-    display: inherit;
   }
 
   .dropdown-content a:hover {
     color: $green;
   }
-  div.drop {
-    display: flex;
-    justify-content: space-around;
-  }
 
   .drop {
+    // border: 1px solid yellow;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    .row {
+      // border: 1px solid green;
+      justify-content: space-around;
+      align-content: center;
+      // width: 70%;
+    }
   }
 }
 
