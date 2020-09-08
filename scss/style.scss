@@ -63,13 +63,9 @@ nav {
   }
   .row {
     // border: 1px solid red;
-    // border: 1px solid red;
     justify-content: center;
   }
-  a,
-  .dropbtn {
-    margin: auto;
-    padding: 0;
+  a {
     color: $text-white;
     text-align: center;
     text-decoration: none;
@@ -78,74 +74,20 @@ nav {
     }
   }
   .nav-links {
-    display: flex;
     div {
       margin: 10px;
     }
   }
-
-  .dropdown {
-    overflow: hidden;
-  }
-
-  // .dropdown .dropbtn {
-  //   cursor: pointer;
-  //   border: none;
-  //   outline: none;
-  //   color: white;
-  //   background-color: rgb(38, 38, 38);
-  //   font-family: inherit;
-  //   margin: 0;
-  // }
-  .dropbtn {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    color: white;
-    background-color: rgb(38, 38, 38);
-    font-family: inherit;
-    margin: 0;
-  }
-  .dropdown {
-    cursor: pointer;
-    border: none;
-    outline: none;
-    color: white;
-    background-color: rgb(38, 38, 38);
-    font-family: inherit;
-    margin: 0;
-  }
-
-  .navbar a:hover,
-  .dropdown:hover .dropbtn,
-  .dropbtn:focus {
-    color: $green;
-  }
-
-  .dropdown-content {
-    width: 100%;
-    margin-bottom: 10px;
-    display: none;
-    color: $text-white;
-    align-self: center;
-  }
-
-  .dropdown-content a {
-    text-decoration: none;
-  }
-
-  .dropdown-content a:hover {
-    color: $green;
-  }
-
-  .drop {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-  }
+}
+.dropdown-content {
+  margin-bottom: 10px;
+  display: none;
 }
 
+.drop {
+  display: flex;
+  flex-direction: column;
+}
 .brand {
   color: white;
   font-size: 2rem;
@@ -155,8 +97,6 @@ nav {
 //-----content-----
 
 .content {
-  // padding: 1rem;
-  // padding-bottom: 4rem;
   height: 100%;
   width: 90vw;
   max-width: 1080px;
