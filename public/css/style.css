@@ -210,79 +210,26 @@ nav .row {
           justify-content: center;
 }
 
-nav a,
-nav .dropbtn {
-  margin: auto;
-  padding: 0;
+nav a {
   color: white;
   text-align: center;
   text-decoration: none;
 }
 
-nav a:hover,
-nav .dropbtn:hover {
+nav a:hover {
   color: #37752b;
-}
-
-nav .nav-links {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 nav .nav-links div {
   margin: 10px;
 }
 
-nav .dropdown {
-  overflow: hidden;
-}
-
-nav .dropbtn {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  color: white;
-  background-color: #262626;
-  font-family: inherit;
-  margin: 0;
-}
-
-nav .dropdown {
-  cursor: pointer;
-  border: none;
-  outline: none;
-  color: white;
-  background-color: #262626;
-  font-family: inherit;
-  margin: 0;
-}
-
-nav .navbar a:hover,
-nav .dropdown:hover .dropbtn,
-nav .dropbtn:focus {
-  color: #37752b;
-}
-
-nav .dropdown-content {
-  width: 100%;
+.dropdown-content {
   margin-bottom: 10px;
   display: none;
-  color: white;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
 }
 
-nav .dropdown-content a {
-  text-decoration: none;
-}
-
-nav .dropdown-content a:hover {
-  color: #37752b;
-}
-
-nav .drop {
+.drop {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -290,11 +237,6 @@ nav .drop {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
 }
 
 .brand {
