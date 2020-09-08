@@ -238,7 +238,17 @@ nav .dropdown {
   overflow: hidden;
 }
 
-nav .dropdown .dropbtn {
+nav .dropbtn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #262626;
+  font-family: inherit;
+  margin: 0;
+}
+
+nav .dropdown {
   cursor: pointer;
   border: none;
   outline: none;

@@ -88,13 +88,29 @@ nav {
     overflow: hidden;
   }
 
-  .dropdown .dropbtn {
+  // .dropdown .dropbtn {
+  //   cursor: pointer;
+  //   border: none;
+  //   outline: none;
+  //   color: white;
+  //   background-color: rgb(38, 38, 38);
+  //   font-family: inherit;
+  //   margin: 0;
+  // }
+  .dropbtn {
     cursor: pointer;
-
     border: none;
     outline: none;
     color: white;
-
+    background-color: rgb(38, 38, 38);
+    font-family: inherit;
+    margin: 0;
+  }
+  .dropdown {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: white;
     background-color: rgb(38, 38, 38);
     font-family: inherit;
     margin: 0;
