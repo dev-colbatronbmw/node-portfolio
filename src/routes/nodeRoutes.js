@@ -6,17 +6,10 @@ const nodeController = require("../controllers/nodeController");
 const nodeRouter = express.Router();
 
 function router() {
-  const {
-    getNode,
-    getFeedback,
-    postFeedback,
-    getFeedbackShow,
-  } = nodeController();
+  const { getNode, postFeedback } = nodeController();
 
   nodeRouter.route("/").get(getNode);
-  nodeRouter.route("/Feedback").get(getFeedback);
-  nodeRouter.route("/Feedback/hide").get(getFeedbackShow);
-  nodeRouter.route("/Feedback/show").get(getFeedback);
+
   nodeRouter.route("/Feedback").post(postFeedback);
 
   return nodeRouter;

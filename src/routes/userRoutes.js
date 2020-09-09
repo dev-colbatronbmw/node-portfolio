@@ -13,7 +13,6 @@ function router() {
     postLogIn,
     getRegister,
     postRegister,
-    postFeedbackRegister,
   } = userController();
 
   // userRouter.get("/").get(getUser);
@@ -73,18 +72,6 @@ function router() {
     req.logout();
     res.redirect("/Node");
   });
-
-  //-----------feedback----------
-  userRouter.route("/LogIn/Feedback/hide").get(getFeedbackShowLogIn);
-  userRouter.route("/LogIn/Feedback/show").get(getFeedbackLogIn);
-  userRouter.route("/LogIn/Feedback").get(getFeedbackLogIn);
-  userRouter.route("/LogIn/Feedback").post(postFeedbackLogIn);
-
-  userRouter.route("/Register/Feedback/hide").get(getFeedbackShowRegister);
-  userRouter.route("/Register/Feedback/show").get(getFeedbackRegister);
-  userRouter.route("/Register/Feedback").get(getFeedbackRegister);
-  userRouter.route("/Register/Feedback").post(postFeedbackRegister);
-  //-----------end feedback----------
 
   function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
