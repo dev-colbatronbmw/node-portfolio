@@ -229,7 +229,7 @@ nav .nav-links div {
   display: none;
 }
 
-.drop {
+.toggle {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -443,8 +443,18 @@ footer .show {
   color: #37752b;
 }
 
-footer .feedback-hide {
+footer .feedback {
   display: none;
+}
+
+footer .toggle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 footer a {
