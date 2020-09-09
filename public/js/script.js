@@ -12,7 +12,8 @@ window.onclick = function (e) {
       myDropdown.classList.remove("toggle");
     }
   }
-  if (!e.target.matches(".feedback-toggle")) {
+  if (!e.target.matches(".footer")) {
+  } else if (!e.target.matches(".feedback-toggle")) {
     var myDropdown = document.getElementById("myFeedback");
     if (myDropdown.classList.contains("toggle")) {
       myDropdown.classList.remove("toggle");
