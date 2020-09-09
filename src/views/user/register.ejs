@@ -7,16 +7,9 @@
     
       <form action="/User/Register" method="POST">
         <div class="my-form">
-            <div class="row align-center justify-center">
-                <div class="my-form-col-1">
-                  <label for="name">Name:&nbsp;</label>
-                </div>
-                <div class="my-form-col-3">
-                  <input type="text" name="name" id="name" required oninvalid="this.setCustomValidity('You have to put in a name') "/>
-    
-    </div>  
-      </div> 
-    
+          <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+          <% } %>
       <div class="row  align-center justify-center">
             <div class="my-form-col-1">
               <label for="email">Email:&nbsp;</label>

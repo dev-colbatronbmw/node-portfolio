@@ -97,7 +97,7 @@ function contactController() {
       ],
       (err, results, fields) => {
         if (err) {
-          console.log("failed to insert product" + err);
+          console.log("failed to add contact" + err);
           res.sendStatus(500);
           return;
         }
