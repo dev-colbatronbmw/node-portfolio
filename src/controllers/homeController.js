@@ -6,11 +6,19 @@ function homeController() {
   function getHome(req, res) {
     debug("Get Home: ", "Working");
 
-    res.render("index", { csrfToken: req.csrfToken() });
+    if (typeof req.session.passport !== "undefined") {
+      res.render("index", {
+        user: req.session.passport.user,
+        csrfToken: req.csrfToken()
+      });
+    }
+    res.render("index", {
+      csrfToken: req.csrfToken()
+    });
   }
 
   return {
-    getHome,
+    getHome
   };
 }
 module.exports = homeController;
