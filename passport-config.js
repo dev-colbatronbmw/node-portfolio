@@ -1,46 +1,3 @@
-// const debug = require("debug")("app:passportConfig");
-
-// const LocalStrategy = require("passport-local").Strategy;
-// const bcrypt = require("bcrypt");
-// require("dotenv/config");
-// const mysql = require("mysql");
-// const pool = mysql.createPool({
-//   host: process.env.HOST,
-//   user: process.env.USER_DATA,
-//   password: process.env.DATABASE_ACCESS,
-//   database: process.env.DATABASE,
-// });
-
-// function getConnection() {
-//   return pool;
-// }
-
-// async function initialize(passport, getUserByEmail, getUserById) {
-//   const authenticateUser = async (email, password, done) => {
-//     const user = getUserByEmail(email); // get user from database here
-//     if (user == null) {
-//       return done(null, false, { message: "No user with that email" });
-//     }
-
-//     try {
-//       if (await bcrypt.compare(password, user.password)) {
-//         return done(null, user);
-//       } else {
-//         return done(null, false, { message: "Password incorrect" });
-//       }
-//     } catch (err) {
-//       return done(err);
-//     }
-//   };
-
-//   passport.use(new LocalStrategy({ usernameField: "email" }, authenticateUser));
-//   passport.serializeUser((user, done) => done(null, user.id));
-//   passport.deserializeUser((id, done) => {
-//     return done(null, getUserById(id));
-//   });
-// }
-
-// module.exports = initialize;
 const debug = require("debug")("app:passportConfig");
 
 const LocalStrategy = require("passport-local").Strategy;
@@ -67,34 +24,18 @@ async function initialize(passport) {
 
   // used to serialize the user for the session
   passport.serializeUser(function (user, done) {
-    user.id = function () {
-      getConnection().query(
-        "SELECT * FROM users WHERE UserEmail = ? ",
-        [user.email],
-        function (err, rows) {
-          done(err, rows[0].id);
-        }
-      );
-    };
-    done(null, user.id);
+    done(null, user);
   });
 
   // used to deserialize the user
-  passport.deserializeUser(function (id, done) {
-    getConnection().query("SELECT * FROM users WHERE Id = ? ", [id], function (
+  passport.deserializeUser(function (Id, done) {
+    getConnection().query("SELECT * FROM users WHERE Id = ? ", [Id], function (
       err,
       rows
     ) {
       done(err, rows[0]);
     });
-    // connection.end();
   });
-
-  // =========================================================================
-  // LOCAL SIGNUP ============================================================
-  // =========================================================================
-  // we are using named strategies since we have one for login and one for signup
-  // by default, if there was no name, it would just be called 'local'
 
   passport.use(
     "local-signup",
@@ -133,16 +74,15 @@ async function initialize(passport) {
                 insertQuery,
                 [newUserMysql.email, newUserMysql.password],
                 function (err, rows) {
-                  // newUserMysql.id = rows.insertId;
-                  debug("insertion error: ", err);
+                  newUserMysql = rows[0];
+                  // newUserMysql.id = rows[0].insertId;
+                  debug("user about to sign up: ", rows[0]);
                   return done(null, newUserMysql);
                 }
               );
-              //   connection.end();
             }
           }
         );
-        // connection.end();
       }
     )
   );
@@ -150,8 +90,6 @@ async function initialize(passport) {
   // =========================================================================
   // LOCAL LOGIN =============================================================
   // =========================================================================
-  // we are using named strategies since we have one for login and one for signup
-  // by default, if there was no name, it would just be called 'local'
 
   passport.use(
     "local-login",
@@ -167,6 +105,7 @@ async function initialize(passport) {
           "SELECT * FROM users WHERE UserEmail = ?",
           [email],
           function (err, rows) {
+            // debug("user: ", rows[0]);
             if (err) return done(err);
             if (!rows.length) {
               return done(
@@ -177,7 +116,7 @@ async function initialize(passport) {
             }
 
             // if the user is found but the password is wrong
-            if (!bcrypt.compareSync(password, rows[0].password))
+            if (!bcrypt.compareSync(password, rows[0].UserPassword))
               return done(
                 null,
                 false,
@@ -185,10 +124,11 @@ async function initialize(passport) {
               ); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
+            debug("user about to log in: ", rows[0]);
+
             return done(null, rows[0]);
           }
         );
-        // connection.end();
       }
     )
   );
