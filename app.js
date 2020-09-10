@@ -12,35 +12,6 @@ require("dotenv/config");
 const csurf = require("csurf");
 const cookieParser = require("cookie-parser");
 
-const mysql = require("mysql");
-
-const pool = mysql.createPool({
-  host: process.env.HOST,
-  user: process.env.USER_DATA,
-  password: process.env.DATABASE_ACCESS,
-  database: process.env.DATABASE,
-});
-
-function getConnection() {
-  return pool;
-}
-
-const initializePassport = require("./passport-config");
-initializePassport(
-  passport,
-  (email) => users.find((user) => user.email === email),
-  (id) => users.find((user) => user.id === id)
-);
-
-// db.connect(function (err) {
-//   if (err) {
-//     console.error("error connecting: " + err.stack);
-//     return;
-//   }
-//   debug("connected to Database");
-// });
-
-// db.end();
 const app = express();
 
 app.set("views", path.join(__dirname, "src", "views"));
@@ -53,17 +24,10 @@ const csrfMiddleware = csurf({
 });
 
 // const IN_PROD = NODE_ENV === "production";
-app.use(
-  session({
-    secret: process.env.SECRET_TUNNLE,
-    resave: false,
-    saveUninitialized: false,
-    expires: new Date(Date.now() + 1000 * 60 * 60 * 3),
-  })
-);
-app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session());
+
+const initializePassport = require("./passport-config");
+initializePassport(passport);
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -87,6 +51,18 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/jquery/dist")),
   express.static(path.join(__dirname, "/node_modules/popper.js/dist"))
 );
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(
+  session({
+    secret: process.env.SECRET_TUNNLE,
+    resave: false,
+    saveUninitialized: false,
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 3),
+  })
+);
+app.use(flash());
 
 const userRouter = require("./src/routes/userRoutes")();
 

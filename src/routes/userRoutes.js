@@ -1,5 +1,6 @@
 const express = require("express");
 var passport = require("passport");
+const debug = require("debug")("app:userRoutes");
 const { check } = require("express-validator");
 
 const userController = require("../controllers/userController");
@@ -18,7 +19,7 @@ function router() {
   // userRouter.get("/").get(getUser);
 
   userRouter.get("/", isLoggedIn, function (req, res) {
-    res.render("user/profile", {
+    res.render("user", {
       user: req.user, // get the user out of session and pass to template
     });
   });
@@ -34,7 +35,7 @@ function router() {
   userRouter.post(
     "/Login",
     passport.authenticate("local-login", {
-      successRedirect: "/", // redirect to the secure profile section
+      successRedirect: "/User/Profile", // redirect to the secure profile section
       failureRedirect: "/User/LogIn", // redirect back to the signup page if there is an error
       failureFlash: true, // allow flash messages
     }),
@@ -42,7 +43,7 @@ function router() {
       console.log("hello");
 
       if (req.body.remember) {
-        req.session.cookie.maxAge = 1000 * 60 * 3;
+        req.session.cookie.maxAge = 1000 * 60 * 60 * 3;
       } else {
         req.session.cookie.expires = false;
       }
@@ -62,7 +63,7 @@ function router() {
   userRouter.post(
     "/Register",
     passport.authenticate("local-signup", {
-      successRedirect: "/User/Login", // redirect to the secure profile section
+      successRedirect: "/User/Profile", // redirect to the secure profile section
       failureRedirect: "/User/Register", // redirect back to the signup page if there is an error
       failureFlash: true, // allow flash messages
     })
@@ -75,10 +76,12 @@ function router() {
 
   function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on
+    debug("user in auth: ", req.user);
+    debug("auth?: ", req.isAuthenticated());
     if (req.isAuthenticated()) return next();
 
     // if they aren't redirect them to the home page
-    res.redirect("/User");
+    res.redirect("/Node");
   }
 
   return userRouter;

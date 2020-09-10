@@ -134,7 +134,7 @@ async function initialize(passport) {
                 [newUserMysql.email, newUserMysql.password],
                 function (err, rows) {
                   // newUserMysql.id = rows.insertId;
-                  debug("insertion error: ", err);
+
                   return done(null, newUserMysql);
                 }
               );
@@ -167,6 +167,7 @@ async function initialize(passport) {
           "SELECT * FROM users WHERE UserEmail = ?",
           [email],
           function (err, rows) {
+            debug("user: ", rows[0]);
             if (err) return done(err);
             if (!rows.length) {
               return done(
@@ -177,7 +178,7 @@ async function initialize(passport) {
             }
 
             // if the user is found but the password is wrong
-            if (!bcrypt.compareSync(password, rows[0].password))
+            if (!bcrypt.compareSync(password, rows[0].UserPassword))
               return done(
                 null,
                 false,

@@ -1,0 +1,56 @@
+
+<%-include("../shared/header")%>
+<div class="col page">
+    <h1>User</h1>
+  <div class="row justify-center">
+    <div class="content ">
+      <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+
+      <form action="/User/LogIn" method="POST">
+        <div class="my-form">
+
+    
+          <div class="row align-center justify-center">
+            <div class="">
+              <label for="email">Email:&nbsp;</label>
+            </div>
+            <div class="">
+              <input type="email" name="email" id="email" required />
+
+</div>  
+  </div> 
+   
+  <div class="row align-center justify-center">
+    <div class="">
+      <label for="password">Password:&nbsp;</label>
+    </div>
+    <div class="">
+      <input type="password" name="password" id="password" required oninvalid="this.setCustomValidity('We All Keep Secrets') "/>
+
+</div>  
+</div> 
+<div class="row align-center">
+
+
+
+<button class="green" type="submit">Log In</button></div>  
+
+
+<div class="row align-center">
+  <div>or &nbsp;</div>
+<a class="green" href="/User/Register">Sign Up</a>
+  
+</div>  
+</div>  
+
+<input type="hidden" name="_csrf" value="<%=csrfToken%>">
+   </form>
+  
+ 
+  </div> 
+  </div>
+  </div>
+</div>
+<%-include("../shared/footer")%>
