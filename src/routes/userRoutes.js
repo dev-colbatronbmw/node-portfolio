@@ -67,6 +67,10 @@ function router() {
   userRouter.get("/Logout", getLogout);
 
   function isLoggedIn(req, res, next) {
+    if (typeof req.session.passport === "undefined") {
+      res.redirect("/User/LogIn");
+    }
+
     var match = async function () {
       await getConnection().query(
         "SELECT * FROM users WHERE UserEmail = ? ",

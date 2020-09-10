@@ -13,9 +13,14 @@ function userController() {
   function getUser(req, res) {
     debug("Get user: ", "Working");
     debug("user: ", req.session.passport.user);
+    if (typeof req.session.passport !== "undefined") {
+      res.render("user/profile", {
+        csrfToken: req.csrfToken(),
+        user: req.session.passport.user
+      });
+    }
     res.render("user/profile", {
-      csrfToken: req.csrfToken(),
-      user: req.session.passport.user
+      csrfToken: req.csrfToken()
     });
   }
   function getProfileEdit(req, res) {
