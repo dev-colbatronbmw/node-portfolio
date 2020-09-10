@@ -42,11 +42,13 @@ async function initialize(passport) {
     new LocalStrategy(
       {
         // by default, local strategy uses username and password, we will override with email
+
         usernameField: "email",
         passwordField: "password",
         passReqToCallback: true, // allows us to pass back the entire request to the callback
       },
       function (req, email, password, done) {
+        debug("name: ", req.body.name);
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
         getConnection().query(
@@ -69,14 +71,14 @@ async function initialize(passport) {
               };
 
               var insertQuery =
-                "INSERT INTO users ( UserEmail, UserPassword ) values (?,?)";
+                "INSERT INTO users ( UserEmail, UserPassword, UserName ) values (?,?,?)";
               getConnection().query(
                 insertQuery,
-                [newUserMysql.email, newUserMysql.password],
+                [newUserMysql.email, newUserMysql.password, req.body.name],
                 function (err, rows) {
-                  newUserMysql = rows[0];
+                  // newUserMysql = rows[0];
                   // newUserMysql.id = rows[0].insertId;
-                  debug("user about to sign up: ", rows[0]);
+                  debug("user about to sign up: ", newUserMysql);
                   return done(null, newUserMysql);
                 }
               );

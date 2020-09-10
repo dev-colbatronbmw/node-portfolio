@@ -38,7 +38,7 @@ function userController() {
     debug("Get user: ", "Working");
     res.render("user/register", {
       csrfToken: req.csrfToken(),
-      user: req.session.passport.user,
+
       message: req.flash("signupMessage"),
     });
   }

@@ -50,7 +50,7 @@ function router() {
   userRouter.post(
     "/Register",
     passport.authenticate("local-signup", {
-      successRedirect: "/User/Profile", // redirect to the secure profile section
+      successRedirect: "/User/Login", // redirect to the secure profile section
       failureRedirect: "/User/Register", // redirect back to the signup page if there is an error
       failureFlash: true, // allow flash messages
     })
