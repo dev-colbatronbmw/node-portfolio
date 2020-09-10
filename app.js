@@ -8,6 +8,7 @@ const session = require("express-session");
 const flash = require("express-flash");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+
 require("dotenv/config");
 const csurf = require("csurf");
 const cookieParser = require("cookie-parser");
@@ -26,7 +27,24 @@ const csrfMiddleware = csurf({
 // const IN_PROD = NODE_ENV === "production";
 
 const initializePassport = require("./passport-config");
-initializePassport(passport);
+initializePassport(
+  passport
+  // (email) =>
+  //   getConnection().query(
+  //     "SELECT * FROM users WHERE UserEmail = ? ",
+  //     [email],
+  //     function (err, rows) {
+  //       done(null, rows[0]);
+  //     }
+  //   ),
+  // (id) =>
+  //   getConnection().query("SELECT * FROM users WHERE Id = ? ", [id], function (
+  //     err,
+  //     rows
+  //   ) {
+  //     done(err, rows[0]);
+  //   })
+);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -51,18 +69,17 @@ app.use(
   express.static(path.join(__dirname, "/node_modules/jquery/dist")),
   express.static(path.join(__dirname, "/node_modules/popper.js/dist"))
 );
-
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(
   session({
     secret: process.env.SECRET_TUNNLE,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     expires: new Date(Date.now() + 1000 * 60 * 60 * 3),
   })
 );
-app.use(flash());
 
 const userRouter = require("./src/routes/userRoutes")();
 

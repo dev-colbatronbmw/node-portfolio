@@ -7,7 +7,13 @@
         <p class="danger">
             **area under construction.**
           </p>
-<p>User: <%=user%></p>
+<p>User Id: <%=user.Id%></p>
+<p>User email: <%=user.UserEmail%></p>
+<p>User show back end: <%=user.ShowBackEnd%></p>
+<p>User Id: <%=user.Mailer%></p>
+<% if (user.isAdmin > 0){ %>
+<p>User is admin: true</p>
+<%} %>
   </div> 
   </div>
   </div>

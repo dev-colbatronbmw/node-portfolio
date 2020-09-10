@@ -2,7 +2,18 @@ const express = require("express");
 var passport = require("passport");
 const debug = require("debug")("app:userRoutes");
 const { check } = require("express-validator");
+require("dotenv/config");
+const mysql = require("mysql");
+const pool = mysql.createPool({
+  host: process.env.HOST,
+  user: process.env.USER_DATA,
+  password: process.env.DATABASE_ACCESS,
+  database: process.env.DATABASE,
+});
 
+function getConnection() {
+  return pool;
+}
 const userController = require("../controllers/userController");
 
 const userRouter = express.Router();
@@ -20,12 +31,14 @@ function router() {
 
   userRouter.get("/", isLoggedIn, function (req, res) {
     res.render("user", {
-      user: req.user, // get the user out of session and pass to template
+      csrfToken: req.csrfToken(),
+      user: req.session.passport.user, // get the user out of session and pass to template
     });
   });
   userRouter.get("/Profile", isLoggedIn, function (req, res) {
     res.render("user/profile", {
-      user: req.user, // get the user out of session and pass to template
+      csrfToken: req.csrfToken(),
+      user: req.session.passport.user, // get the user out of session and pass to template
     });
   });
 
@@ -71,17 +84,47 @@ function router() {
 
   userRouter.get("/Logout", function (req, res) {
     req.logout();
-    res.redirect("/Node");
+    if (typeof req.session.passport !== "undefined") {
+      req.session.passport = "undefined";
+    }
+
+    res.redirect("/User/LogIn");
   });
 
   function isLoggedIn(req, res, next) {
-    // if user is authenticated in the session, carry on
-    debug("user in auth: ", req.user);
-    debug("auth?: ", req.isAuthenticated());
-    if (req.isAuthenticated()) return next();
+    var match = async function () {
+      await getConnection().query(
+        "SELECT * FROM users WHERE UserEmail = ? ",
+        [req.session.passport.user.UserEmail],
+        function (err, rows) {
+          if (req.session.passport.user.UserPassword === rows[0].UserPassword) {
+            return true;
+          }
+          return false;
+        }
+      );
+    };
+
+    var myAuth = function (match) {
+      if (
+        typeof req.session.passport.user === "undefined" ||
+        req.session.passport.user === null
+      ) {
+        return false;
+      }
+
+      // doube check password around this true
+      if (match) {
+        return true;
+      }
+      return false;
+    };
+
+    debug("my auth?: ", myAuth(match()));
+    if (myAuth(match())) return next();
 
     // if they aren't redirect them to the home page
-    res.redirect("/Node");
+    res.redirect("/User/LogIn");
   }
 
   return userRouter;
