@@ -15,14 +15,30 @@ function userController() {
     debug("user: ", req.session.passport.user);
     res.render("user/profile", {
       csrfToken: req.csrfToken(),
-      user: req.session.passport.user,
+      user: req.session.passport.user
+    });
+  }
+  function getProfileEdit(req, res) {
+    debug("Get user: ", "Working");
+    debug("user: ", req.session.passport.user);
+    res.render("user/edit", {
+      csrfToken: req.csrfToken(),
+      user: req.session.passport.user
+    });
+  }
+  function getEditPassword(req, res) {
+    debug("Get user: ", "Working");
+    debug("user: ", req.session.passport.user);
+    res.render("user/password", {
+      csrfToken: req.csrfToken(),
+      user: req.session.passport.user
     });
   }
   function getLogIn(req, res) {
     debug("Get Log In: ", "Working");
     res.render("user/login", {
       csrfToken: req.csrfToken(),
-      message: req.flash("loginMessage"),
+      message: req.flash("loginMessage")
     });
   }
   function getLogout(req, res) {
@@ -39,7 +55,7 @@ function userController() {
     res.render("user/register", {
       csrfToken: req.csrfToken(),
 
-      message: req.flash("signupMessage"),
+      message: req.flash("signupMessage")
     });
   }
 
@@ -48,6 +64,8 @@ function userController() {
     getLogIn,
     getLogout,
     getRegister,
+    getProfileEdit,
+    getEditPassword
   };
 }
 module.exports = userController;

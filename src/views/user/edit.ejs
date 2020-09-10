@@ -1,0 +1,62 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">Profile</h3>
+  <div class="row justify-center">
+    <div class="content">
+      <div class="col justify-center">
+        <div class="row justify-center">
+          <p class="danger">**area under construction.**</p>
+          <% if (user.isAdmin > 0){ %>
+          <div class="row justify-center"><p>Admin</p></div>
+          <%} %>
+        </div>
+        <form action="/User/Profile/Edit" method="POST">
+          <div class="row align-center justify-center">
+            <div class="my-form-col-1">
+              <label for="name">Name:&nbsp;</label>
+            </div>
+            <div class="my-form-col-3">
+              <input
+                type="text"
+                name="name"
+                id="name"
+                required
+                oninvalid="this.setCustomValidity('You have to put in a name') "
+                value="<%=user.UserName%>"
+              />
+            </div>
+          </div>
+          <div class="row align-center justify-center">
+            <label for="email">Email:&nbsp;</label>
+
+            <input
+              type="email"
+              name="email"
+              id="email"
+              required
+              oninvalid="this.setCustomValidity('You have to put in an Email') "
+              value="<%=user.UserEmail%>"
+            />
+          </div>
+          <div class="row justify-center">
+            <label for="mailer">Signed up for mailer:</label>
+            <input type="checkbox" id="mailer" name="mailer" <%=(user.Mailer ===
+            0) ? '' : 'checked'%> />
+          </div>
+          <div class="row justify-center">
+            <input class="green" type="submit" value="Update Profile" />
+          </div>
+        </form>
+        <div class="row justify-center">
+          <form action="/User/Edit/Password" method="GET">
+            <input class="green" type="submit" value="Change Password" />
+          </form>
+        </div>
+        <div class="row justify-center"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%-include("../shared/footer")%>
