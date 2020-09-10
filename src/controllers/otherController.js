@@ -9,7 +9,7 @@ const pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.USER_DATA,
   password: process.env.DATABASE_ACCESS,
-  database: process.env.DATABASE,
+  database: process.env.DATABASE
 });
 
 function getConnection() {
@@ -20,21 +20,20 @@ function otherController() {
   debug("other controller: ", "working");
 
   function getOther(req, res) {
-    res.header(
-      "Cache-Control",
-      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-    );
     debug("Get other: ", "Working");
-
+    if (typeof req.session.passport !== "undefined") {
+      res.render("other", {
+        csrfToken: req.csrfToken(),
+        user: req.session.passport.user
+      });
+    }
     res.render("other", {
-      csrfToken: req.csrfToken(),
-      Page: "Other",
-      variable: req.session.variable,
+      csrfToken: req.csrfToken()
     });
   }
 
   return {
-    getOther,
+    getOther
   };
 }
 module.exports = otherController;

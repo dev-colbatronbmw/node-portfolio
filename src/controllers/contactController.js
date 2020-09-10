@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.USER_DATA,
   password: process.env.DATABASE_ACCESS,
-  database: process.env.DATABASE,
+  database: process.env.DATABASE
 });
 
 function getConnection() {
@@ -22,10 +22,17 @@ function contactController() {
 
   function getContact(req, res) {
     const Page = "Contact";
-    res.cookie("Page", Page);
+
     debug("Get Contact: ", "Working");
+
+    if (typeof req.session.passport !== "undefined") {
+      res.render("contact", {
+        user: req.session.passport.user,
+        csrfToken: req.csrfToken()
+      });
+    }
     res.render("contact", {
-      csrfToken: req.csrfToken(),
+      csrfToken: req.csrfToken()
     });
   }
 
@@ -87,7 +94,7 @@ function contactController() {
         Email,
         TypeOfContact,
         Comments,
-        Contacted,
+        Contacted
       ],
       (err, results, fields) => {
         if (err) {
@@ -112,8 +119,8 @@ function contactController() {
             secure: true, // true for 465, false for other ports
             auth: {
               user: process.env.EMAIL_USER, // generated ethereal user
-              pass: process.env.EMAIL_PASSWORD, // generated ethereal password
-            },
+              pass: process.env.EMAIL_PASSWORD // generated ethereal password
+            }
           });
 
           // send mail with defined transport object
@@ -141,7 +148,7 @@ function contactController() {
             How To Contact: ${TypeOfContact}<br/>
             Comments: ${Comments}<br/>
             ${didContact}
-            </p>`, // html body
+            </p>` // html body
           });
         }
 
@@ -161,8 +168,8 @@ function contactController() {
             secure: true, // true for 465, false for other ports
             auth: {
               user: process.env.EMAIL_USER, // generated ethereal user
-              pass: process.env.EMAIL_PASSWORD, // generated ethereal password
-            },
+              pass: process.env.EMAIL_PASSWORD // generated ethereal password
+            }
           });
 
           // send mail with defined transport object
@@ -181,7 +188,7 @@ function contactController() {
             ${FirstName} ${LastName}<br/>
    
             Thank you for your interest! <br/>
-           I will get back to you as soon as possible.</p>`, // html body
+           I will get back to you as soon as possible.</p>` // html body
           });
         }
 
@@ -194,7 +201,7 @@ function contactController() {
 
   return {
     getContact,
-    postContact,
+    postContact
     // getMyContacts,
   };
 }

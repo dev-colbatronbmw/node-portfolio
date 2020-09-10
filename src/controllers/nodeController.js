@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.USER_DATA,
   password: process.env.DATABASE_ACCESS,
-  database: process.env.DATABASE,
+  database: process.env.DATABASE
 });
 
 function getConnection() {
@@ -23,8 +23,16 @@ function nodeController() {
 
   function getNode(req, res) {
     debug("Get node: ", "Working");
+    debug("node user status : ", typeof req.session.passport);
+    debug("node user value : ", req.session.passport);
+    if (typeof req.session.passport !== "undefined") {
+      res.render("node", {
+        user: req.session.passport.user,
+        csrfToken: req.csrfToken()
+      });
+    }
     res.render("node", {
-      csrfToken: req.csrfToken(),
+      csrfToken: req.csrfToken()
     });
   }
 
@@ -55,8 +63,8 @@ function nodeController() {
             secure: true,
             auth: {
               user: process.env.EMAIL_USER,
-              pass: process.env.EMAIL_PASSWORD,
-            },
+              pass: process.env.EMAIL_PASSWORD
+            }
           });
           let info = await transporter.sendMail({
             from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
@@ -76,7 +84,7 @@ function nodeController() {
             Page Sent from: &nbsp  ${page}<br/>
              Is the feedback good?: &nbsp  ${good}<br/>
              Completed: &nbsp  ${complete}<br/>
-            </p>`, // html body
+            </p>` // html body
           });
         }
 
@@ -89,8 +97,8 @@ function nodeController() {
             secure: true,
             auth: {
               user: process.env.EMAIL_USER,
-              pass: process.env.EMAIL_PASSWORD,
-            },
+              pass: process.env.EMAIL_PASSWORD
+            }
           });
           let info = await transporter.sendMail({
             from: '"Colby Holmstead" <dev@colbyholmstead.com>', // sender address
@@ -105,7 +113,7 @@ function nodeController() {
             html: `<p>   
             So you want me to look at:<br/> ${feedback}<br/> <br/>  I can fix that no Problem. (Probably)<br/><br/>
             I will let you know when I do. 
-            </p>`, // html body
+            </p>` // html body
           });
         }
 
@@ -117,7 +125,7 @@ function nodeController() {
 
   return {
     getNode,
-    postFeedback,
+    postFeedback
   };
 }
 module.exports = nodeController;
