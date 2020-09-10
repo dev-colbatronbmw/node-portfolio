@@ -8,7 +8,7 @@ const pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.USER_DATA,
   password: process.env.DATABASE_ACCESS,
-  database: process.env.DATABASE,
+  database: process.env.DATABASE
 });
 
 function getConnection() {
@@ -19,10 +19,18 @@ const userController = require("../controllers/userController");
 const userRouter = express.Router();
 
 function router() {
-  const { getUser, getLogIn, getLogout, getRegister } = userController();
+  const {
+    getUser,
+    getLogIn,
+    getLogout,
+    getRegister,
+    getProfileEdit,
+    getEditPassword
+  } = userController();
 
   userRouter.get("/Profile", isLoggedIn, getUser);
-
+  userRouter.get("/Profile/Edit", isLoggedIn, getProfileEdit);
+  userRouter.get("/Edit/Password", isLoggedIn, getEditPassword);
   userRouter.route("/LogIn").get(getLogIn);
 
   userRouter.post(
@@ -30,7 +38,7 @@ function router() {
     passport.authenticate("local-login", {
       successRedirect: "/User/Profile", // redirect to the secure profile section
       failureRedirect: "/User/LogIn", // redirect back to the signup page if there is an error
-      failureFlash: true, // allow flash messages
+      failureFlash: true // allow flash messages
     }),
     function (req, res) {
       console.log("hello");
@@ -52,7 +60,7 @@ function router() {
     passport.authenticate("local-signup", {
       successRedirect: "/User/Login", // redirect to the secure profile section
       failureRedirect: "/User/Register", // redirect back to the signup page if there is an error
-      failureFlash: true, // allow flash messages
+      failureFlash: true // allow flash messages
     })
   );
 
