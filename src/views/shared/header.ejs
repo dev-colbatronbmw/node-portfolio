@@ -36,13 +36,15 @@
                     <div>
                       <a href="https://github.com/dev-colbatronbmw"> GitHub</a>
                     </div>
-
+                    <% if (typeof user === "undefined"){ %>
                     <div>
                       <a href="/User/LogIn">Log In</a>
                     </div>
+                    <%}%> <% if (typeof user !== "undefined"){ %>
                     <div>
                       <a href="/User/Logout">Log out</a>
                     </div>
+                    <%}%>
                   </div>
                 </div>
               </div>

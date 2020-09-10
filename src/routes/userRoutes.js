@@ -19,30 +19,10 @@ const userController = require("../controllers/userController");
 const userRouter = express.Router();
 
 function router() {
-  const {
-    // getUser,
-    getLogIn,
-    postLogIn,
-    getRegister,
-    postRegister,
-  } = userController();
+  const { getUser, getLogIn, getLogout, getRegister } = userController();
 
-  // userRouter.get("/").get(getUser);
+  userRouter.get("/Profile", isLoggedIn, getUser);
 
-  userRouter.get("/", isLoggedIn, function (req, res) {
-    res.render("user", {
-      csrfToken: req.csrfToken(),
-      user: req.session.passport.user, // get the user out of session and pass to template
-    });
-  });
-  userRouter.get("/Profile", isLoggedIn, function (req, res) {
-    res.render("user/profile", {
-      csrfToken: req.csrfToken(),
-      user: req.session.passport.user, // get the user out of session and pass to template
-    });
-  });
-
-  // userRouter.get("/Profile").get(getUser);
   userRouter.route("/LogIn").get(getLogIn);
 
   userRouter.post(
@@ -65,12 +45,6 @@ function router() {
   );
 
   userRouter.route("/Register").get(getRegister);
-  // userRouter.route("/Register").post(postRegister);
-
-  // app.get('/signup', function(req, res) {
-  // 	// render the page and pass in any flash data if it exists
-  // 	res.render('signup.ejs', { message: req.flash('signupMessage') });
-  // });
 
   // process the signup form
   userRouter.post(
@@ -82,14 +56,7 @@ function router() {
     })
   );
 
-  userRouter.get("/Logout", function (req, res) {
-    req.logout();
-    if (typeof req.session.passport !== "undefined") {
-      req.session.passport = "undefined";
-    }
-
-    res.redirect("/User/LogIn");
-  });
+  userRouter.get("/Logout", getLogout);
 
   function isLoggedIn(req, res, next) {
     var match = async function () {
