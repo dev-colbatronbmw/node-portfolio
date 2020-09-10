@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   host: process.env.HOST,
   user: process.env.USER_DATA,
   password: process.env.DATABASE_ACCESS,
-  database: process.env.DATABASE,
+  database: process.env.DATABASE
 });
 
 function getConnection() {
@@ -23,8 +23,14 @@ function expController() {
   function getExp(req, res) {
     debug("Get exp: ", "Working");
 
+    if (typeof req.session.passport !== "undefined") {
+      res.render("exp", {
+        user: req.session.passport.user,
+        csrfToken: req.csrfToken()
+      });
+    }
     res.render("exp", {
-      csrfToken: req.csrfToken(),
+      csrfToken: req.csrfToken()
     });
   }
 
@@ -161,7 +167,7 @@ function expController() {
     getCaseMatch,
     getPlankCooking,
     getNodeApi,
-    getResume,
+    getResume
   };
 }
 module.exports = expController;
