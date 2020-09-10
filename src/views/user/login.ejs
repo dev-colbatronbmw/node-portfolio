@@ -3,7 +3,10 @@
   <h3 class="heading">Log In</h3>
   <div class="row justify-center">
     <div class="content ">
-    
+      <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+
       <form action="/User/LogIn" method="POST">
         <div class="my-form">
 

@@ -28,7 +28,7 @@
                 <div class="nav-links col">
                   <div class="row">
                     <div class="dropdown">
-                      <a class="dropbtn" onclick="myFunction()">Me</a>
+                      <a class="dropbtn" onclick="myToggle('myDropdown')">Me</a>
                     </div>
                     <div>
                       <a href="#">Fun</a>
@@ -36,10 +36,15 @@
                     <div>
                       <a href="https://github.com/dev-colbatronbmw"> GitHub</a>
                     </div>
-
+                    <% if (typeof user === "undefined"){ %>
                     <div>
                       <a href="/User/LogIn">Log In</a>
                     </div>
+                    <%}%> <% if (typeof user !== "undefined"){ %>
+                    <div>
+                      <a href="/User/Logout">Log out</a>
+                    </div>
+                    <%}%>
                   </div>
                 </div>
               </div>

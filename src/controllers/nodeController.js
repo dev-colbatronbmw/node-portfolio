@@ -22,34 +22,10 @@ function nodeController() {
   debug("node controller: ", "working");
 
   function getNode(req, res) {
-    res.header(
-      "Cache-Control",
-      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-    );
     debug("Get node: ", "Working");
     res.render("node", {
       csrfToken: req.csrfToken(),
-      Page: "Node",
-      variable: req.session.variable,
     });
-  }
-  function getFeedbackShow(req, res) {
-    req.session.variable = "show";
-    res.header(
-      "Cache-Control",
-      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-    );
-    res.redirect("/Node");
-  }
-
-  function getFeedback(req, res) {
-    res.header(
-      "Cache-Control",
-      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
-    );
-    req.session.variable = "hide";
-
-    res.redirect("/Node");
   }
 
   function postFeedback(req, res) {
@@ -134,15 +110,13 @@ function nodeController() {
         }
 
         secondary().catch(console.error);
-        res.redirect("/Node");
+        res.redirect("back");
       }
     );
   }
 
   return {
     getNode,
-    getFeedback,
-    getFeedbackShow,
     postFeedback,
   };
 }

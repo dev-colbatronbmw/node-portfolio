@@ -84,7 +84,7 @@ nav {
   display: none;
 }
 
-.drop {
+.toggle {
   display: flex;
   flex-direction: column;
 }
@@ -256,8 +256,12 @@ footer {
   .show {
     color: $green;
   }
-  .feedback-hide {
+  .feedback {
     display: none;
+  }
+  .toggle {
+    display: flex;
+    flex-direction: column;
   }
 
   a {
