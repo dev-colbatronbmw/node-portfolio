@@ -30,7 +30,6 @@
     "jquery": "^3.5.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
-    "node-addon-api": "^3.0.0",
     "nodemailer": "^6.4.11",
     "nodemon": "^2.0.4",
     "npm": "^6.14.8",
@@ -42,8 +41,7 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2",
-    "node-gyp": "^7.1.0"
+    "eslint-plugin-import": "^2.20.2"
   },
   "nodemonConfig": {
     "restartable": "rs",
