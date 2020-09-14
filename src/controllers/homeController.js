@@ -5,6 +5,7 @@ function homeController() {
 
   function getHome(req, res) {
     debug("Get Home: ", "Working");
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
     if (typeof req.session.passport !== "undefined") {
       res.render("index", {

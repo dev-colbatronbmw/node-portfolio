@@ -11,6 +11,7 @@ function userController() {
   debug("user controller: ", "working");
 
   function getUser(req, res) {
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     debug("Get user: ", "Working");
     debug("user: ", req.session.passport.user);
     if (typeof req.session.passport !== "undefined") {
@@ -24,6 +25,7 @@ function userController() {
     });
   }
   function getProfileEdit(req, res) {
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     debug("Get user: ", "Working");
     debug("user: ", req.session.passport.user);
     res.render("user/edit", {
@@ -32,6 +34,7 @@ function userController() {
     });
   }
   function getEditPassword(req, res) {
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     debug("Get user: ", "Working");
     debug("user: ", req.session.passport.user);
     res.render("user/password", {
@@ -40,6 +43,7 @@ function userController() {
     });
   }
   function getLogIn(req, res) {
+    // res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     debug("Get Log In: ", "Working");
     res.render("user/login", {
       csrfToken: req.csrfToken(),
@@ -47,6 +51,7 @@ function userController() {
     });
   }
   function getLogout(req, res) {
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     req.logout();
     if (typeof req.session.passport !== "undefined") {
       req.session.passport = "undefined";
