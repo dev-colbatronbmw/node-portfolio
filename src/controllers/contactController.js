@@ -30,10 +30,11 @@ function contactController() {
         user: req.session.passport.user,
         csrfToken: req.csrfToken()
       });
+    } else {
+      res.render("contact", {
+        csrfToken: req.csrfToken()
+      });
     }
-    res.render("contact", {
-      csrfToken: req.csrfToken()
-    });
   }
 
   // function getMyContacts(req, res) {

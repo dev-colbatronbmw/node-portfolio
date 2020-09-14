@@ -11,7 +11,10 @@ function userController() {
   debug("user controller: ", "working");
 
   function getUser(req, res) {
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get user: ", "Working");
     debug("user: ", req.session.passport.user);
     if (typeof req.session.passport !== "undefined") {
@@ -19,13 +22,17 @@ function userController() {
         csrfToken: req.csrfToken(),
         user: req.session.passport.user
       });
+    } else {
+      res.render("user/profile", {
+        csrfToken: req.csrfToken()
+      });
     }
-    res.render("user/profile", {
-      csrfToken: req.csrfToken()
-    });
   }
   function getProfileEdit(req, res) {
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get user: ", "Working");
     debug("user: ", req.session.passport.user);
     res.render("user/edit", {
@@ -34,7 +41,10 @@ function userController() {
     });
   }
   function getEditPassword(req, res) {
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get user: ", "Working");
     debug("user: ", req.session.passport.user);
     res.render("user/password", {
@@ -43,7 +53,10 @@ function userController() {
     });
   }
   function getLogIn(req, res) {
-    // res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get Log In: ", "Working");
     res.render("user/login", {
       csrfToken: req.csrfToken(),
@@ -51,7 +64,10 @@ function userController() {
     });
   }
   function getLogout(req, res) {
-    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     req.logout();
     if (typeof req.session.passport !== "undefined") {
       req.session.passport = "undefined";
@@ -61,6 +77,10 @@ function userController() {
   }
 
   function getRegister(req, res) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     debug("Get user: ", "Working");
     res.render("user/register", {
       csrfToken: req.csrfToken(),

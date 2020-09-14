@@ -23,6 +23,11 @@ function nodeController() {
 
   function getNode(req, res) {
     debug("Get node: ", "Working");
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
+
     debug("node user status : ", typeof req.session.passport);
     debug("node user value : ", req.session.passport);
     if (typeof req.session.passport !== "undefined") {
@@ -30,10 +35,11 @@ function nodeController() {
         user: req.session.passport.user,
         csrfToken: req.csrfToken()
       });
+    } else {
+      res.render("node", {
+        csrfToken: req.csrfToken()
+      });
     }
-    res.render("node", {
-      csrfToken: req.csrfToken()
-    });
   }
 
   function postFeedback(req, res) {

@@ -1,0 +1,59 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">blog</h3>
+  <!-- <div class="row justify-center">
+    <div class="content col align-center page">
+      <h4 class="green">content</h4>
+     <div class="head-shot">
+        <img src="/images/Holmstead.jpg" alt="" />
+      </div>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat omnis
+        quibusdam repellendus iste ullam, fugit quia natus commodi aspernatur
+        recusandae, aliquam excepturi inventore doloremque. Ipsa perspiciatis at
+        officia dolor consequuntur. Sapiente aliquam assumenda omnis iusto
+        consequatur. Illum itaque harum cumque accusantium fugiat nisi sapiente
+        fuga facilis corrupti eos commodi natus hic, excepturi, libero veritatis
+        quos necessitatibus? Distinctio, odit. Blanditiis, corrupti. Corporis
+        eum rem ea molestias suscipit consectetur magni quae. Sint nisi
+        consequuntur esse, sunt magnam soluta quam fuga rerum quaerat
+        repudiandae, voluptatibus porro impedit, itaque aperiam! Enim dolorem
+        necessitatibus reprehenderit. Perspiciatis aut cumque adipisci ab unde
+        obcaecati hic quae similique asperiores culpa iure corporis, provident
+        sunt, blanditiis omnis. Quos earum delectus quis recusandae culpa
+        voluptatum, perferendis totam in alias dolores. Veniam id quam
+        laudantium quibusdam ut enim, saepe quisquam. Cumque sint veritatis
+        facilis ipsum praesentium animi nemo ullam voluptatem, soluta dolores
+        dolore ea nobis eius deleniti architecto fugiat est magni.
+      </p> 
+    </div> -->
+  <% blog.forEach(post => {%>
+  <div class="row justify-center">
+    <div class="content col align-center page">
+      <h4 class="green"><%= post.title %></h4>
+      <div class="head-shot">
+        <img src="/images/Holmstead.jpg" alt="" />
+      </div>
+      <div class="col align-center">
+        <p><%= post.content%></p>
+        <div class="row align-center">
+          <%var likeCount = 0%> <% likes.forEach(like => { %> <% if (like.postId
+          === post.postId) {likeCount ++ ;} %> <% }); %>
+          <p>Likes: <%= likeCount%></p>
+          <form action="/like">
+            <input type="submit" value="Like" class="green" />
+          </form>
+        </div>
+        <% comments.forEach(comment => { %>
+        <br />
+        <% if (comment.postId === post.postId) {%>
+        <p><%= comment.content%></p>
+        <% } %> <% }); %>
+      </div>
+    </div>
+  </div>
+  <% }); %>
+</div>
+
+<%-include("../shared/footer")%>

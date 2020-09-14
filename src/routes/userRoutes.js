@@ -42,6 +42,10 @@ function router() {
     }),
     function (req, res) {
       console.log("hello");
+      res.header(
+        "Cache-Control",
+        "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+      );
 
       if (req.body.remember) {
         req.session.cookie.maxAge = 1000 * 60 * 60 * 3;
@@ -67,6 +71,10 @@ function router() {
   userRouter.get("/Logout", getLogout);
 
   function isLoggedIn(req, res, next) {
+    res.header(
+      "Cache-Control",
+      "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
+    );
     if (typeof req.session.passport === "undefined") {
       res.redirect("/User/LogIn");
     }
