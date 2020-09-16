@@ -1,0 +1,46 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">blog</h3>
+
+  <% blog.forEach(post => {%>
+  <div class="row justify-center">
+    <div class="content col align-center page">
+      <h4 class="green"><%= post.title %></h4>
+      <div class="blog-images">
+        
+      </div>
+      <div class="col align-center">
+        <p><%= post.content%></p>
+        <div class="row align-center">
+          <div class="col align-center">
+            <%var likeCount = 0%> <% likes.forEach(like => { %> <% if
+            (like.postId === post.postId) {likeCount ++ ;} %> <% }); %>
+            <p>Likes: <%= likeCount%></p>
+            <form action="/like">
+              <input type="submit" value="Like" class="green" />
+            </form>
+          </div>
+          <div class="col align-center">
+            <div class="row align-center">
+              <%var commentCount = 0%> <% comments.forEach(comment => { %> <% if
+              (comment.postId === post.postId) { commentCount ++ ;} %> <% }); %>
+              <p>Comments:<%= commentCount%></p>
+            </div>
+            <form action="/Blog/<%=post.postId %>" method="get">
+              <input type="submit" value="Add Comment" />
+            </form>
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <form action="/Blog/<%=post.postId %>" method="get">
+        <input type="submit" value="Read More" />
+      </form>
+    </div>
+  </div>
+  <% }); %>
+</div>
+
+<%-include("../shared/footer")%>

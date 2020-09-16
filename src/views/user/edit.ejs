@@ -47,10 +47,12 @@
           <div class="row justify-center">
             <input class="green" type="submit" value="Update Profile" />
           </div>
+          <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
         </form>
         <div class="row justify-center">
           <form action="/User/Edit/Password" method="GET">
             <input class="green" type="submit" value="Change Password" />
+            <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
           </form>
         </div>
         <div class="row justify-center"></div>

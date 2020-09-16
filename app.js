@@ -21,7 +21,7 @@ app.set("view engine", "ejs");
 const port = process.env.PORT || 5000;
 
 const csrfMiddleware = csurf({
-  cookie: true,
+  cookie: true
 });
 
 // const IN_PROD = NODE_ENV === "production";
@@ -54,6 +54,7 @@ app.use(csrfMiddleware);
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public", "views/shared")));
 app.use(express.static(path.join(__dirname, "public", "css")));
 app.use(express.static(path.join(__dirname, "public", "js")));
 app.use(
@@ -77,9 +78,13 @@ app.use(
     secret: process.env.SECRET_TUNNLE,
     resave: true,
     saveUninitialized: true,
-    expires: new Date(Date.now() + 1000 * 60 * 60 * 3),
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 3)
   })
 );
+
+const blogRouter = require("./src/routes/blogRoutes")();
+
+app.use("/Blog", blogRouter);
 
 const userRouter = require("./src/routes/userRoutes")();
 
