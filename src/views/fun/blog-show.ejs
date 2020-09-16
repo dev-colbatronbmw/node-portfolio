@@ -1,0 +1,34 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">Blog Post</h3>
+
+  <% blog.forEach(post => {%>
+  <div class="row justify-center">
+    <div class="content col align-center page">
+      <h4 class="green"><%= post.title %></h4>
+      <div class="head-shot">
+        <img src="/images/Holmstead.jpg" alt="" />
+      </div>
+      <div class="col align-center">
+        <p><%= post.content%></p>
+        <div class="row align-center">
+          <%var likeCount = 0%> <% likes.forEach(like => { %> <% if (like.postId
+          === post.postId) {likeCount ++ ;} %> <% }); %>
+          <p>Likes: <%= likeCount%></p>
+          <form action="/like">
+            <input type="submit" value="Like" class="green" />
+          </form>
+        </div>
+        <% comments.forEach(comment => { %>
+        <br />
+        <% if (comment.postId === post.postId) {%>
+        <p><%= comment.content%></p>
+        <% } %> <% }); %>
+      </div>
+    </div>
+  </div>
+  <% }); %>
+</div>
+
+<%-include("../shared/footer")%>
