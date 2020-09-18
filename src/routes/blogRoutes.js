@@ -1,4 +1,18 @@
 const express = require("express");
+const debug = require("debug")("app:blogRoutes");
+const { check } = require("express-validator");
+require("dotenv/config");
+const mysql = require("mysql");
+const pool = mysql.createPool({
+  host: process.env.HOST,
+  user: process.env.USER_DATA,
+  password: process.env.DATABASE_ACCESS,
+  database: process.env.DATABASE
+});
+
+function getConnection() {
+  return pool;
+}
 // const { check } = require("express-validator");
 
 const blogController = require("../controllers/blogController");
@@ -19,25 +33,14 @@ function router() {
   } = blogController();
 
   blogRouter.route("/").get(getBlog);
-
-  blogRouter.route("/Add", isLoggedIn, getAddPost);
-  blogRouter.route("/Delete/:postId", isLoggedIn, getDeletePost);
-  blogRouter.route("/Delete/:postId").post(postDeletePost);
-  blogRouter.route("/Edit/:postId", isLoggedIn, getEditPost);
-  blogRouter.route("/Add").post(postAddPost);
-  blogRouter.route("/Comment").post(postAddComment);
-  blogRouter.route("/Edit/:postId").post(postEditPost);
+  blogRouter.route("/Delete/:postId").get(isLoggedIn, getDeletePost);
+  blogRouter.route("/Delete/:postId").post(isLoggedIn, postDeletePost);
+  blogRouter.route("/Edit/:postId").get(isLoggedIn, getEditPost);
+  blogRouter.route("/Add").get(isLoggedIn, getAddPost);
+  blogRouter.route("/Add").post(isLoggedIn, postAddPost);
+  blogRouter.route("/Comment").post(isLoggedIn, postAddComment);
+  blogRouter.route("/Edit/:postId").post(isLoggedIn, postEditPost);
   blogRouter.route("/:postId").get(getBlogShow);
-
-  // blogRouter.route("/").get(getBlog);
-  // blogRouter.route("/Delete/:postId").get(getDeletePost);
-  // blogRouter.route("/Delete/:postId").post(postDeletePost);
-  // blogRouter.route("/Edit/:postId").get(getEditPost);
-  // blogRouter.route("/Add").get(getAddPost);
-  // blogRouter.route("/Add").post(postAddPost);
-  // blogRouter.route("/Comment").post(postAddComment);
-  // blogRouter.route("/Edit/:postId").post(postEditPost);
-  // blogRouter.route("/:postId").get(getBlogShow);
 
   function isLoggedIn(req, res, next) {
     res.header(

@@ -18,28 +18,19 @@
           <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
         </form>
         <h4 class="green"><%= blog.title %></h4>
-        <div class="head-shot">
-          <img src="/images/Holmstead.jpg" alt="" />
-        </div>
+
         <div class="col align-center">
           <p><%= blog.content%></p>
           <div class="row align-center">
             <%var likeCount = 0%> <% likes.forEach(like => { %> <% if
             (like.postId === blog.postId) {likeCount ++ ;} %> <% }); %>
             <p>Likes: <%= likeCount%></p>
-            <form action="/like">
-              <input type="submit" value="Like" class="green" />
-            </form>
           </div>
           <% comments.forEach(comment => { %>
           <br />
           <% if (comment.postId === blog.postId) {%>
           <p><%= comment.content%></p>
           <% } %> <% }); %>
-          <p><%=blog.postId%></p>
-          <form action="/Blog/Edit/<%=blog.postId%>" method="GET">
-            <input type="submit" value="Edit Post" />
-          </form>
         </div>
       </div>
     </div>
