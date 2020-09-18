@@ -386,6 +386,20 @@ nav .nav-links div {
   text-align: center;
 }
 
+textarea {
+  width: 16rem;
+  height: 16rem;
+}
+
+.comment {
+  width: 16rem;
+  height: 6rem;
+}
+
+.comment-section {
+  background-color: #b4b4b4;
+}
+
 .hide-on-mobile {
   display: none;
 }
@@ -528,6 +542,14 @@ footer a:hover {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+  }
+  textarea {
+    width: 30rem;
+    height: 30rem;
+  }
+  .comment {
+    width: 30rem;
+    height: 4rem;
   }
 }
 

@@ -73,7 +73,7 @@ function userController() {
       req.session.passport = "undefined";
     }
 
-    res.redirect("/User/LogIn");
+    res.redirect("back");
   }
 
   function getRegister(req, res) {

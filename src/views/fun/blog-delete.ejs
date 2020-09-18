@@ -1,0 +1,48 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">Delete Post</h3>
+  <div class="row container">
+    <form action="/Blog" method="GET">
+      <input class="green" type="submit" value="Back to Message Board" />
+    </form>
+  </div>
+  <br />
+  <div class="col page">
+    <div class="row justify-center">
+      <div class="content col align-center page">
+        <h3 class="danger">Are you Sure you want to Delete this Post?</h3>
+        <h3 class="danger">This can not be undone</h3>
+        <form action="/Blog/Delete/<%=blog.postId%>" method="POST">
+          <input type="submit" class="danger" value="Delete Post" />
+          <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+        </form>
+        <h4 class="green"><%= blog.title %></h4>
+        <div class="head-shot">
+          <img src="/images/Holmstead.jpg" alt="" />
+        </div>
+        <div class="col align-center">
+          <p><%= blog.content%></p>
+          <div class="row align-center">
+            <%var likeCount = 0%> <% likes.forEach(like => { %> <% if
+            (like.postId === blog.postId) {likeCount ++ ;} %> <% }); %>
+            <p>Likes: <%= likeCount%></p>
+            <form action="/like">
+              <input type="submit" value="Like" class="green" />
+            </form>
+          </div>
+          <% comments.forEach(comment => { %>
+          <br />
+          <% if (comment.postId === blog.postId) {%>
+          <p><%= comment.content%></p>
+          <% } %> <% }); %>
+          <p><%=blog.postId%></p>
+          <form action="/Blog/Edit/<%=blog.postId%>" method="GET">
+            <input type="submit" value="Edit Post" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%-include("../shared/footer")%>

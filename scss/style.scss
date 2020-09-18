@@ -187,7 +187,17 @@ nav {
     text-align: center;
   }
 }
-
+textarea {
+  width: 16rem;
+  height: 16rem;
+}
+.comment {
+  width: 16rem;
+  height: 6rem;
+}
+.comment-section {
+  background-color: #b4b4b4;
+}
 //-----end content-----
 
 //-----modifiers-----
@@ -341,6 +351,14 @@ footer {
 @media (min-width: 650px) {
   .nav-row {
     flex-direction: row;
+  }
+  textarea {
+    width: 30rem;
+    height: 30rem;
+  }
+  .comment {
+    width: 30rem;
+    height: 4rem;
   }
 }
 

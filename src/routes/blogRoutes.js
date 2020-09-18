@@ -6,10 +6,38 @@ const blogController = require("../controllers/blogController");
 const blogRouter = express.Router();
 
 function router() {
-  const { getBlog, getBlogShow } = blogController();
+  const {
+    getBlog,
+    getDeletePost,
+    getAddPost,
+    getBlogShow,
+    postAddPost,
+    getEditPost,
+    postEditPost,
+    postDeletePost,
+    postAddComment
+  } = blogController();
 
   blogRouter.route("/").get(getBlog);
+
+  blogRouter.route("/Add", isLoggedIn, getAddPost);
+  blogRouter.route("/Delete/:postId", isLoggedIn, getDeletePost);
+  blogRouter.route("/Delete/:postId").post(postDeletePost);
+  blogRouter.route("/Edit/:postId", isLoggedIn, getEditPost);
+  blogRouter.route("/Add").post(postAddPost);
+  blogRouter.route("/Comment").post(postAddComment);
+  blogRouter.route("/Edit/:postId").post(postEditPost);
   blogRouter.route("/:postId").get(getBlogShow);
+
+  // blogRouter.route("/").get(getBlog);
+  // blogRouter.route("/Delete/:postId").get(getDeletePost);
+  // blogRouter.route("/Delete/:postId").post(postDeletePost);
+  // blogRouter.route("/Edit/:postId").get(getEditPost);
+  // blogRouter.route("/Add").get(getAddPost);
+  // blogRouter.route("/Add").post(postAddPost);
+  // blogRouter.route("/Comment").post(postAddComment);
+  // blogRouter.route("/Edit/:postId").post(postEditPost);
+  // blogRouter.route("/:postId").get(getBlogShow);
 
   function isLoggedIn(req, res, next) {
     res.header(

@@ -1,0 +1,64 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">New Post</h3>
+
+  <div class="row container">
+    <form action="/Blog" method="GET">
+      <input class="green" type="submit" value="Back to Message Board" />
+    </form>
+  </div>
+  <br />
+  <form action="/Blog/Add" method="POST">
+    <div class="row justify-center">
+      <div class="col content align-center">
+        <br />
+        <div class="row">
+          <!-- <label for="title">Post Title:</label> -->
+          <input
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Post Title Here"
+          />
+        </div>
+        <br />
+        <p class="danger">**Image uploading to come**</p>
+        <!-- <br />
+        <div class="row"><p>You may add 3 images you your post</p></div>
+        <div class="row">
+          <div class="col align-center">
+            <label for="image1">Image :</label> 
+            <input type="text" name="image1" id="image1" />
+
+            <input type="text" name="image2" id="image2" />
+
+            <input type="text" name="image3" id="image3" />
+          </div>
+        </div> -->
+        <br />
+        <div class="row">
+          <!-- <label for="content">Post :</label> -->
+          <textarea
+            name="content"
+            id="content"
+            placeholder="Post Content Here"
+          ></textarea>
+        </div>
+        <br />
+        <div class="row">
+          <label for="published">Publish: </label>
+          <input type="checkbox" name="published" id="published" checked />
+        </div>
+        <br />
+        <div class="row">
+          <input type="submit" value="Post" />
+        </div>
+        <br />
+      </div>
+    </div>
+    <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+  </form>
+</div>
+
+<%-include("../shared/footer")%>
