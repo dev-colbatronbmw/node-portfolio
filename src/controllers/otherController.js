@@ -26,10 +26,11 @@ function otherController() {
         csrfToken: req.csrfToken(),
         user: req.session.passport.user
       });
+    } else {
+      res.render("other", {
+        csrfToken: req.csrfToken()
+      });
     }
-    res.render("other", {
-      csrfToken: req.csrfToken()
-    });
   }
 
   return {

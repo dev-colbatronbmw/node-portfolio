@@ -2,6 +2,7 @@
 
 <div class="col page">
   <h3 class="heading">Profile</h3>
+
   <div class="row justify-center">
     <div class="content">
       <div class="col justify-center">
@@ -27,9 +28,32 @@
         <%} %>
         <div class="row justify-center">
           <form action="/User/Profile/Edit">
-            <input type="submit" value="Edit Profile" />
+            <input class="green" type="submit" value="Edit Profile" />
           </form>
         </div>
+        <div class="row">
+          <div class="col align-center profile-posts">
+            <p class="green">Your Message Board Posts</p>
+            <div class="row justify-center">
+              <ul>
+                <% blog.forEach(post => { if(user.Id === post.userId){%>
+
+                <li>
+                  <a href="/Blog/<%=post.postId%>"><%=post.title%></a>
+                </li>
+                <br />
+                <%}}); %>
+              </ul>
+            </div>
+            <div class="row">
+              <form action="/Blog" method="GET">
+                <input class="green" type="submit" value="Message Board" />
+              </form>
+            </div>
+            <br />
+          </div>
+        </div>
+        <br />
       </div>
     </div>
   </div>

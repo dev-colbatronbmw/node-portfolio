@@ -28,10 +28,11 @@ function expController() {
         user: req.session.passport.user,
         csrfToken: req.csrfToken()
       });
+    } else {
+      res.render("exp", {
+        csrfToken: req.csrfToken()
+      });
     }
-    res.render("exp", {
-      csrfToken: req.csrfToken()
-    });
   }
 
   function getResume(req, res) {

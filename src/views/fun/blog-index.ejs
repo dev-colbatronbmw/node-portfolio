@@ -1,0 +1,65 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">Message Board</h3>
+  <div class="row justify-center">
+    <div class="col align-center page">
+      <% if (typeof user !== "undefined"){ %>
+      <form action="/Blog/Add" method="GET">
+        <input type="submit" value="Add A Post" class="green" />
+      </form>
+      <% } %>
+    </div>
+  </div>
+  <% blog.forEach(post => {%> <%if (post.published>0){%>
+  <div class="row justify-center">
+    <div class="content col align-center page">
+      <h4 class="green"><%= post.title %></h4>
+      <div class="blog-images"></div>
+      <div class="col align-center">
+        <p><%= post.content%></p>
+        <div class="row justify-around">
+          <%var likeCount = 0%> <% likes.forEach(like => { %> <% if (like.postId
+          === post.postId) {likeCount ++ ;} %> <% }); %>
+          <p>Likes: <span class="green"><%= likeCount%></span></p>
+
+          <%var commentCount = 0%> <% comments.forEach(comment => { %> <% if
+          (comment.postId === post.postId) { commentCount ++ ;} %> <% }); %>
+          <p>Comments: <span class="green"><%=commentCount%></span></p>
+        </div>
+      </div>
+      <div class="row justify-around">
+        <% if (typeof user !== "undefined"){ %>
+
+        <form action="/Blog/<%=post.postId%>" method="get">
+          <input type="submit" value="Like" class="green" />
+        </form>
+
+        <% } else { %>
+        <form action="/User/LogIn" method="GET">
+          <input type="submit" value="Like" class="green" />
+        </form>
+        <% } %> <% if (typeof user !== "undefined"){ %>
+        <form action="/Blog/<%=post.postId%>" method="get">
+          <input type="submit" value="Comment" class="green" />
+        </form>
+        <% } else { %>
+        <form action="/User/LogIn" method="GET">
+          <input type="submit" value="Comment" class="green" />
+        </form>
+        <% } %>
+      </div>
+      <br />
+      <% if (typeof user !== "undefined"){ {users.forEach(us => { if (user.Id
+      === us.userId && post.userId === us.userId) {%>
+      <form action="/Blog/Edit/<%=post.postId%>" method="GET">
+        <input type="submit" value="Edit Post" class="green" />
+      </form>
+      <%} });}} %>
+      <br />
+    </div>
+  </div>
+  <% } }); %>
+</div>
+
+<%-include("../shared/footer")%>
