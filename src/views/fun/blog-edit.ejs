@@ -1,0 +1,68 @@
+<%-include("../shared/header")%>
+
+<div class="col page">
+  <h3 class="heading">Update Post</h3>
+  <div class="row container">
+    <form action="/Blog" method="GET">
+      <input class="green" type="submit" value="Back to Message Board" />
+    </form>
+  </div>
+  <br />
+  <div class="row justify-center">
+    <div class="col content align-center">
+      <form action="/Blog/Edit/<%=blog.postId%>" method="POST">
+        <br />
+        <div class="row justify-center align-center">
+          <label for="title">Post Title:&nbsp;</label>
+          <input type="text" name="title" id="title" value="<%= blog.title%>" />
+        </div>
+        <br />
+        <p class="danger">**Image uploading to come**</p>
+        <!-- <br />
+        <div class="row"><p>You may add 3 images you your post</p></div>
+        <div class="row">
+          <div class="col align-center">
+            <label for="image1">Image :</label> 
+            <input type="text" name="image1" id="image1" />
+
+            <input type="text" name="image2" id="image2" />
+
+            <input type="text" name="image3" id="image3" />
+          </div>
+        </div> -->
+        <br />
+        <div class="row justify-center align-center">
+          <div class="col align-center">
+            <label for="content">Post Content</label>
+            <textarea name="content" id="content">  <%=blog.content%></textarea>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <label for="published">Publish: </label>
+          <% if (blog.published > 0){%>
+          <input type="checkbox" name="published" id="published" checked />
+          <%} else{%>
+          <input type="checkbox" name="published" id="published" />
+          <%} %>
+        </div>
+        <br />
+        <div class="row justify-center">
+          <input type="submit" value="Update Post" class="green" />
+        </div>
+        <br />
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+      </form>
+
+      <% {users.forEach(us => {%> <%if (user.Id === us.userId && blog.userId ===
+      us.userId) {%>
+      <form action="/Blog/Delete/<%=blog.postId%>" method="get">
+        <input type="submit" class="danger" value="Delete Post" />
+      </form>
+      <%} });} %>
+
+      <br />
+    </div>
+  </div>
+</div>
+<%-include("../shared/footer")%>
