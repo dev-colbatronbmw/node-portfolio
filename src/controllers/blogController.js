@@ -149,7 +149,7 @@ function blogController() {
         };
       });
 
-      debug("Users: ", users);
+      // debug("Users: ", users);
 
       getConnection().query(
         "SELECT * FROM blog WHERE postId = ?",
@@ -213,9 +213,9 @@ function blogController() {
                     };
                   });
 
-                  // debug("posts", blog);
-                  // debug("comments", comments);
-                  // debug("likes", likes);
+                  debug("posts", blog);
+                  debug("comments", comments);
+                  debug("likes", likes);
 
                   if (typeof req.session.passport !== "undefined") {
                     res.render("./fun/blog-show", {
@@ -536,6 +536,59 @@ function blogController() {
       res.redirect("/Blog");
     });
   }
+  function postRemoveLike(req, res) {
+    debug("edit Post: ", "Working");
+    // debug("title", req.body.title);
+    // debug("post Content", req.body.content);
+    // debug("published", req.body.published);
+
+    const likeId = req.params.likeId;
+    // var userId;
+    // var likeId;
+    // if (typeof req.session.passport !== "undefined") {
+    //   userId = req.session.passport.user.Id;
+    // } else {
+    //   userId = 1;
+    // }
+
+    const qString = "DELETE FROM blogLikes WHERE likeId = ? ";
+    getConnection().query(qString, [likeId], (err, results, fields) => {
+      if (err) {
+        console.log("failed to add contact" + err);
+        res.redirect("back");
+        return;
+      }
+      res.redirect("back");
+    });
+  }
+  function postAddLike(req, res) {
+    debug("edit Post: ", "Working");
+    // debug("title", req.body.title);
+    // debug("post Content", req.body.content);
+    // debug("published", req.body.published);
+
+    const postId = req.params.postId;
+
+    debug("postId: ", postId);
+
+    var userId;
+    if (typeof req.session.passport !== "undefined") {
+      userId = req.session.passport.user.Id;
+    } else {
+      userId = 1;
+    }
+    debug("userId: ", userId);
+
+    const qString = "INSERT INTO blogLikes (postId, userId) Values (?, ?)";
+    getConnection().query(qString, [postId, userId], (err, results, fields) => {
+      if (err) {
+        console.log("failed to add contact" + err);
+        res.redirect("back");
+        return;
+      }
+      res.redirect("back");
+    });
+  }
 
   return {
     getBlog,
@@ -546,7 +599,9 @@ function blogController() {
     postEditPost,
     getDeletePost,
     postDeletePost,
-    postAddComment
+    postAddComment,
+    postAddLike,
+    postRemoveLike
   };
 }
 

@@ -198,6 +198,21 @@ textarea {
 .comment-section {
   background-color: #b4b4b4;
 }
+
+.profile-posts {
+  text-decoration: none;
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    color: $green;
+  }
+  ul {
+    border: none;
+  }
+}
+
 //-----end content-----
 
 //-----modifiers-----

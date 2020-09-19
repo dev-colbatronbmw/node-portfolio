@@ -29,7 +29,9 @@ function router() {
     getEditPost,
     postEditPost,
     postDeletePost,
-    postAddComment
+    postAddComment,
+    postAddLike,
+    postRemoveLike
   } = blogController();
 
   blogRouter.route("/").get(getBlog);
@@ -41,6 +43,8 @@ function router() {
   blogRouter.route("/Comment").post(isLoggedIn, postAddComment);
   blogRouter.route("/Edit/:postId").post(isLoggedIn, postEditPost);
   blogRouter.route("/:postId").get(getBlogShow);
+  blogRouter.route("/AddLike/:postId").post(postAddLike);
+  blogRouter.route("/RemoveLike/:likeId").post(postRemoveLike);
 
   function isLoggedIn(req, res, next) {
     res.header(

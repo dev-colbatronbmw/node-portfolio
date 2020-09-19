@@ -400,6 +400,23 @@ textarea {
   background-color: #b4b4b4;
 }
 
+.profile-posts {
+  text-decoration: none;
+}
+
+.profile-posts a {
+  color: black;
+  text-decoration: none;
+}
+
+.profile-posts a:hover {
+  color: #37752b;
+}
+
+.profile-posts ul {
+  border: none;
+}
+
 .hide-on-mobile {
   display: none;
 }

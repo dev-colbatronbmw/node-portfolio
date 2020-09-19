@@ -2,57 +2,55 @@
 <div class="col page">
   <h3 class="heading">Log In</h3>
   <div class="row justify-center">
-    <div class="content ">
+    <div class="content">
       <div class="row justify-center">
         <p class="danger">**area under construction.**</p>
       </div>
       <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %>
+      <div class="alert alert-danger"><%= message %></div>
+      <% } %>
 
       <form action="/User/LogIn" method="POST">
         <div class="my-form">
-
-    
           <div class="row align-center justify-center">
             <div class="">
               <label for="email">Email:&nbsp;</label>
             </div>
             <div class="">
               <input type="email" name="email" id="email" required />
+            </div>
+          </div>
 
-</div>  
-  </div> 
-   
-  <div class="row align-center justify-center">
-    <div class="">
-      <label for="password">Password:&nbsp;</label>
+          <div class="row align-center justify-center">
+            <div class="">
+              <label for="password">Password:&nbsp;</label>
+            </div>
+            <div class="">
+              <input
+                type="password"
+                name="password"
+                id="password"
+                required
+                oninvalid="this.setCustomValidity('We All Keep Secrets') "
+              />
+            </div>
+          </div>
+          <br />
+          <div class="row align-center">
+            <button class="green" type="submit">Log In</button>
+          </div>
+          <br /><br />
+
+          <div class="row align-center">
+            <div>or &nbsp;</div>
+            <a class="green" href="/User/Register">Sign Up</a>
+          </div>
+        </div>
+
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+      </form>
     </div>
-    <div class="">
-      <input type="password" name="password" id="password" required oninvalid="this.setCustomValidity('We All Keep Secrets') "/>
-
-</div>  
-</div> 
-<div class="row align-center">
-
-
-
-<button class="green" type="submit">Log In</button></div>  
-
-
-<div class="row align-center">
-  <div>or &nbsp;</div>
-<a class="green" href="/User/Register">Sign Up</a>
-  
-</div>  
-</div>  
-
-<input type="hidden" name="_csrf" value="<%=csrfToken%>">
-   </form>
-  
- 
-  </div> 
-  </div>
   </div>
 </div>
+
 <%-include("../shared/footer")%>

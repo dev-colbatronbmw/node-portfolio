@@ -30,10 +30,11 @@
       </div>
       <div class="row justify-around">
         <% if (typeof user !== "undefined"){ %>
-        <form action="/like" method="POST">
+
+        <form action="/Blog/<%=post.postId%>" method="get">
           <input type="submit" value="Like" class="green" />
-          <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
         </form>
+
         <% } else { %>
         <form action="/User/LogIn" method="GET">
           <input type="submit" value="Like" class="green" />
