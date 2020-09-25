@@ -150,6 +150,7 @@ code {
 }
 
 .row {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -386,7 +387,7 @@ nav .nav-links div {
   text-align: center;
 }
 
-textarea {
+.message-area {
   width: 16rem;
   height: 16rem;
 }
@@ -567,7 +568,7 @@ footer a:hover {
         -ms-flex-direction: row;
             flex-direction: row;
   }
-  textarea {
+  .message-area {
     width: 30rem;
     height: 30rem;
   }

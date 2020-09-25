@@ -28,6 +28,7 @@
 .row {
   // border: 1px solid yellow;
   // height: 100%;
+  width: 100%;
   display: flex;
 }
 .justify-center {
@@ -187,7 +188,7 @@ nav {
     text-align: center;
   }
 }
-textarea {
+.message-area {
   width: 16rem;
   height: 16rem;
 }
@@ -195,6 +196,7 @@ textarea {
   width: 16rem;
   height: 6rem;
 }
+
 .comment-section {
   background-color: #b4b4b4;
 }
@@ -373,7 +375,7 @@ footer {
   .nav-row {
     flex-direction: row;
   }
-  textarea {
+  .message-area {
     width: 30rem;
     height: 30rem;
   }
