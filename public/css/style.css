@@ -417,6 +417,13 @@ textarea {
   border: none;
 }
 
+.small-text {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #37752b;
+}
+
 .hide-on-mobile {
   display: none;
 }
