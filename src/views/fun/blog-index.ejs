@@ -14,6 +14,10 @@
   <% blog.forEach(post => {%> <%if (post.published>0){%>
   <div class="row justify-center">
     <div class="content col align-center page">
+      <% users.forEach(author => { %> <% if(author.userId == post.userId){ %>
+      <p class="small-text">From: <%=author.userName%></p>
+
+      <% } }); %>
       <h4 class="green"><%= post.title %></h4>
       <div class="blog-images"></div>
       <div class="col align-center">
