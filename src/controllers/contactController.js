@@ -84,7 +84,7 @@ function contactController() {
 
           // create reusable transporter object using the default SMTP transport
           let transporter = nodemailer.createTransport({
-            host: "smtp.dreamhost.com",
+            host: process.env.EMAIL_HOST,
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
@@ -133,7 +133,7 @@ function contactController() {
 
           // create reusable transporter object using the default SMTP transport
           let transporter = nodemailer.createTransport({
-            host: "smtp.dreamhost.com",
+            host: process.env.EMAIL_HOST,
             port: 465,
             secure: true, // true for 465, false for other ports
             auth: {
