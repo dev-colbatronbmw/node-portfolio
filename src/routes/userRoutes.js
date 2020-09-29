@@ -25,12 +25,22 @@ function router() {
     getLogout,
     getRegister,
     getProfileEdit,
-    getEditPassword
+    getEditPassword,
+    postEditPassword,
+    getForgotPassword,
+    postForgotPassword,
+    getForgotPasswordReset,
+    postForgotPasswordReset
   } = userController();
 
   userRouter.get("/Profile", isLoggedIn, getUser);
   userRouter.get("/Profile/Edit", isLoggedIn, getProfileEdit);
   userRouter.get("/Edit/Password", isLoggedIn, getEditPassword);
+  userRouter.get("/Forgot/Password", getForgotPassword);
+  userRouter.route("/Forgot/Password").post(postForgotPassword); // generate token for password reset
+  userRouter.get("/Forgot/Password/:token", getForgotPasswordReset);
+  userRouter.route("/Forgot/Password/Reset").post(postForgotPasswordReset);
+  userRouter.route("/Edit/Password", isLoggedIn).post(postEditPassword);
   userRouter.route("/LogIn").get(getLogIn);
 
   userRouter.post(

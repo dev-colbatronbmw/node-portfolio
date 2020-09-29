@@ -27,24 +27,7 @@ const csrfMiddleware = csurf({
 // const IN_PROD = NODE_ENV === "production";
 
 const initializePassport = require("./passport-config");
-initializePassport(
-  passport
-  // (email) =>
-  //   getConnection().query(
-  //     "SELECT * FROM users WHERE UserEmail = ? ",
-  //     [email],
-  //     function (err, rows) {
-  //       done(null, rows[0]);
-  //     }
-  //   ),
-  // (id) =>
-  //   getConnection().query("SELECT * FROM users WHERE Id = ? ", [id], function (
-  //     err,
-  //     rows
-  //   ) {
-  //     done(err, rows[0]);
-  //   })
-);
+initializePassport(passport);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
