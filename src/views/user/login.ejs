@@ -3,11 +3,12 @@
   <h3 class="heading">Log In</h3>
   <div class="row justify-center">
     <div class="content">
-      <div class="row justify-center">
-        <p class="danger">**area under construction.**</p>
-      </div>
       <% if (message.length > 0) { %>
-      <div class="alert alert-danger"><%= message %></div>
+      <div class="alert green row justify-center"><%= message %></div>
+      <!-- <div class="alert row justify-center">
+        Did you forget your password?
+        <a class="green" href="/User/Forgot/Password">Reset Password</a>
+      </div> -->
       <% } %>
 
       <form action="/User/LogIn" method="POST">
@@ -38,17 +39,33 @@
           <br />
           <div class="row align-center">
             <button class="green" type="submit">Log In</button>
-          </div>
-          <br /><br />
-
-          <div class="row align-center">
-            <div>or &nbsp;</div>
-            <a class="green" href="/User/Register">Sign Up</a>
-          </div>
-        </div>
+      
+      
 
         <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
       </form>
+
+      <form
+        class=""
+        action="/User/Register"
+        method="get"
+      >
+        <input class="green" type="submit" value="Sign Up" />
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+      </form>
+    </div>
+      <div class="row align-center">
+        <div>or &nbsp;</div>
+        <form
+        class=""
+        action="/User/Forgot/Password"
+        method="get"
+      >
+        <input class="green" type="submit" value="Forgot Password" />
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+      </form>
+       
+      </div>
     </div>
   </div>
 </div>
