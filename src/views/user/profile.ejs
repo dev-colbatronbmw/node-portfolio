@@ -7,7 +7,11 @@
     <div class="content">
       <div class="col justify-center">
         <div class="row justify-center">
-          <p class="danger">**area under construction.**</p>
+          <% if (message.length > 0) { %>
+          <div class="alert danger row justify-center">
+            <p>**<%= message %>**</p>
+          </div>
+          <% } %>
         </div>
         <div class="row justify-center"><p>Name: <%=user.UserName%></p></div>
         <div class="row justify-center"><p>Email: <%=user.UserEmail%></p></div>
