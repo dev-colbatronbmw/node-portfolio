@@ -69,69 +69,71 @@ function userController() {
 
         // debug("posts in connection", blog);
 
-        getConnection().query("SELECT * FROM blogComments", [], function (
-          err,
-          rows
-        ) {
-          if (err) {
-            res.redirect("back");
-            return;
-          }
-
-          //code modification
-          comments = rows.map(row => {
-            return {
-              commentId: row.commentId,
-              postId: row.postId,
-              content: row.content,
-              userId: row.userId
-            };
-          });
-
-          getConnection().query("SELECT * FROM blogLikes", [], function (
-            err,
-            rows
-          ) {
+        getConnection().query(
+          "SELECT * FROM blogComments",
+          [],
+          function (err, rows) {
             if (err) {
               res.redirect("back");
               return;
             }
 
             //code modification
-            likes = rows.map(row => {
+            comments = rows.map(row => {
               return {
-                likeId: row.likeId,
+                commentId: row.commentId,
                 postId: row.postId,
+                content: row.content,
                 userId: row.userId
               };
             });
 
-            // debug("posts", blog);
-            // debug("comments", comments);
-            // debug("likes", likes);
+            getConnection().query(
+              "SELECT * FROM blogLikes",
+              [],
+              function (err, rows) {
+                if (err) {
+                  res.redirect("back");
+                  return;
+                }
 
-            if (typeof req.session.passport !== "undefined") {
-              res.render("user/profile", {
-                csrfToken: req.csrfToken(),
-                user: req.session.passport.user,
-                users: users,
-                blog: blog,
-                comments: comments,
-                likes: likes,
-                message: req.flash("loginMessage")
-              });
-            } else {
-              res.render("user/profile", {
-                csrfToken: req.csrfToken(),
-                users: users,
-                blog: blog,
-                comments: comments,
-                likes: likes,
-                message: req.flash("loginMessage")
-              });
-            }
-          });
-        });
+                //code modification
+                likes = rows.map(row => {
+                  return {
+                    likeId: row.likeId,
+                    postId: row.postId,
+                    userId: row.userId
+                  };
+                });
+
+                // debug("posts", blog);
+                // debug("comments", comments);
+                // debug("likes", likes);
+
+                if (typeof req.session.passport !== "undefined") {
+                  res.render("user/profile", {
+                    csrfToken: req.csrfToken(),
+                    user: req.session.passport.user,
+                    users: users,
+                    blog: blog,
+                    comments: comments,
+                    likes: likes,
+                    message: req.flash("loginMessage")
+                  });
+                } else {
+                  res.render("user/profile", {
+                    csrfToken: req.csrfToken(),
+                    users: users,
+                    blog: blog,
+                    comments: comments,
+                    likes: likes,
+                    message: req.flash("loginMessage")
+                  });
+                }
+              }
+            );
+          }
+        );
       });
     });
   }
@@ -403,14 +405,14 @@ function userController() {
                         to: `${user.userEmail}`, // list of receivers
                         subject: "Password Change Link", // Subject line
                         text: `
-              ${user.userName}, To change your password plaese paste this URL into your browser: http://localhost:4000/User/Forgot/Password/${token} \n
+              ${user.userName}, To change your password plaese paste this URL into your browser: https://colbyholmstead.com/User/Forgot/Password/${token} \n
               If you were not the one who changed your password plase contact Colby at dev@colbyholmstead.com \n
               I will get back to you as soon as possible.
               `, // plain text body
                         html: `<p>
 
               ${user.userName},</p>
-               <p>To change your password plaese paste this URL into your browser: http://localhost:4000/User/Forgot/Password/${token}</p>
+               <p>To change your password plaese paste this URL into your browser: https://colbyholmstead.com/User/Forgot/Password/${token}</p>
                <p> If you were not the one who changed your password plase contact Colby at dev@colbyholmstead.com</p>
               <p> I will get back to you as soon as possible. </p>` // html body
                       });
