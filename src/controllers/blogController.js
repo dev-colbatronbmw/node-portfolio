@@ -8,12 +8,12 @@ const fs = require("fs");
 ("use strict");
 const nodemailer = require("nodemailer");
 
-const pool = mysql.createPool({
-  host: process.env.HOST,
-  user: process.env.USER_DATA,
-  password: process.env.DATABASE_ACCESS,
-  database: process.env.DATABASE
-});
+// const pool = mysql.createPool({
+//   host: process.env.HOST,
+//   user: process.env.USER_DATA,
+//   password: process.env.DATABASE_ACCESS,
+//   database: process.env.DATABASE
+// });
 
 function getConnection() {
   return pool;
@@ -67,67 +67,69 @@ function blogController() {
 
         // debug("posts in connection", blog);
 
-        getConnection().query("SELECT * FROM blogComments", [], function (
-          err,
-          rows
-        ) {
-          if (err) {
-            res.redirect("back");
-            return;
-          }
-
-          //code modification
-          comments = rows.map(row => {
-            return {
-              commentId: row.commentId,
-              postId: row.postId,
-              content: row.content,
-              userId: row.userId
-            };
-          });
-
-          getConnection().query("SELECT * FROM blogLikes", [], function (
-            err,
-            rows
-          ) {
+        getConnection().query(
+          "SELECT * FROM blogComments",
+          [],
+          function (err, rows) {
             if (err) {
               res.redirect("back");
               return;
             }
 
             //code modification
-            likes = rows.map(row => {
+            comments = rows.map(row => {
               return {
-                likeId: row.likeId,
+                commentId: row.commentId,
                 postId: row.postId,
+                content: row.content,
                 userId: row.userId
               };
             });
 
-            // debug("posts", blog);
-            // debug("comments", comments);
-            // debug("likes", likes);
+            getConnection().query(
+              "SELECT * FROM blogLikes",
+              [],
+              function (err, rows) {
+                if (err) {
+                  res.redirect("back");
+                  return;
+                }
 
-            if (typeof req.session.passport !== "undefined") {
-              res.render("./fun/blog-index", {
-                csrfToken: req.csrfToken(),
-                user: req.session.passport.user,
-                users: users,
-                blog: blog,
-                comments: comments,
-                likes: likes
-              });
-            } else {
-              res.render("./fun/blog-index", {
-                csrfToken: req.csrfToken(),
-                users: users,
-                blog: blog,
-                comments: comments,
-                likes: likes
-              });
-            }
-          });
-        });
+                //code modification
+                likes = rows.map(row => {
+                  return {
+                    likeId: row.likeId,
+                    postId: row.postId,
+                    userId: row.userId
+                  };
+                });
+
+                // debug("posts", blog);
+                // debug("comments", comments);
+                // debug("likes", likes);
+
+                if (typeof req.session.passport !== "undefined") {
+                  res.render("./fun/blog-index", {
+                    csrfToken: req.csrfToken(),
+                    user: req.session.passport.user,
+                    users: users,
+                    blog: blog,
+                    comments: comments,
+                    likes: likes
+                  });
+                } else {
+                  res.render("./fun/blog-index", {
+                    csrfToken: req.csrfToken(),
+                    users: users,
+                    blog: blog,
+                    comments: comments,
+                    likes: likes
+                  });
+                }
+              }
+            );
+          }
+        );
       });
     });
   }
