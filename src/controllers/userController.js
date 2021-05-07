@@ -10,12 +10,12 @@ require("dotenv/config");
 const mysql = require("mysql");
 const { reset } = require("nodemon");
 
-const pool = mysql.createPool({
-  host: process.env.HOST,
-  user: process.env.USER_DATA,
-  password: process.env.DATABASE_ACCESS,
-  database: process.env.DATABASE
-});
+// const pool = mysql.createPool({
+//   host: process.env.HOST,
+//   user: process.env.USER_DATA,
+//   password: process.env.DATABASE_ACCESS,
+//   database: process.env.DATABASE
+// });
 
 function getConnection() {
   return pool;
