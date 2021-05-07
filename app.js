@@ -65,9 +65,9 @@ app.use(
   })
 );
 
-const blogRouter = require("./src/routes/blogRoutes")();
+// const blogRouter = require("./src/routes/blogRoutes")();
 
-app.use("/Blog", blogRouter);
+// app.use("/Blog", blogRouter);
 
 const userRouter = require("./src/routes/userRoutes")();
 
